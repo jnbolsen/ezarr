@@ -1,17 +1,16 @@
----
 services:
 # MEDIA SERVER  
   plex:
     image: cr.hotio.dev/plex:latest
     container_name: plex
-    ports:
-      - 32400:32400
+    networks:
+      - main
     environment:
       - PUID=${UID}
       - PGID=13000
       - UMASK=002
       - TZ=${TIMEZONE}
-      - ADVERTISE_IP=http://192.168.53.232:32400,plex.jnbolsen.com
+      - ADVERTISE_IP=http://192.168.53.232:32400,https://plex.jnbolsen.com
       - ALLOWED_NETWORKS
       - PLEX_PASS=no
       - PLEX_CLAIM=${PLEX_CLAIM}
@@ -23,6 +22,8 @@ services:
   tautulli:
     image: cr.hotio.dev/hotio/tautulli:testing
     container_name: tautulli
+    networks:
+      - main
     depends_on:
       - plex
     ports:
@@ -41,6 +42,8 @@ services:
   radarr1:
     image: cr.hotio.dev/hotio/radarr:nightly
     container_name: radarr1
+    networks:
+      - main
     ports:
       - 7878:7878
     environment:
@@ -56,6 +59,8 @@ services:
   radarr2:
     image: cr.hotio.dev/hotio/radarr:nightly
     container_name: radarr2
+    networks:
+      - main
     depends_on:
       - radarr1
     ports:
@@ -73,6 +78,8 @@ services:
   sonarr:
     image: cr.hotio.dev/hotio/sonarr:v4
     container_name: sonarr
+    networks:
+      - main
     ports:
       - 8989:8989
     environment:
@@ -88,6 +95,8 @@ services:
   lidarr:
     image: cr.hotio.dev/hotio/lidarr:nightly
     container_name: lidarr
+    networks:
+      - main
     ports:
       - 8686:8686
     environment:
@@ -103,6 +112,8 @@ services:
   readarr:
     image: cr.hotio.dev/hotio/readarr:nightly
     container_name: readarr
+    networks:
+      - main
     ports:
       - 8787:8787
     environment:
@@ -118,6 +129,8 @@ services:
   prowlarr:
     image: cr.hotio.dev/hotio/prowlarr:nightly
     container_name: prowlarr
+    networks:
+      - main
     ports:
       - 9696:9696
     environment:
@@ -132,6 +145,8 @@ services:
   bazarr1:
     container_name: bazarr1
     image: cr.hotio.dev/hotio/bazarr:nightly
+    networks:
+      - main
     ports:
       - 6767:6767
     environment:
@@ -141,10 +156,12 @@ services:
       - TZ=${TIMEZONE}
     volumes:
       - ${ROOT_DIR}/docker/bazarr1-config:/config
-  
+
   bazarr2:
     container_name: bazarr2
     image: cr.hotio.dev/hotio/bazarr:ngihtly
+    networks:
+      - main
     ports:
       - 6768:6767
     environment:
@@ -154,10 +171,12 @@ services:
       - TZ=${TIMEZONE}
     volumes:
       - ${ROOT_DIR}/docker/bazarr2-config:/config
-  
+
   qbittorrent:
     image: cr.hotio.dev/hotio/qbittorrent:latest
     container_name: qbittorrent
+    networks:
+      - main
     ports:
       - 8080:8080
       - 8118:8118
@@ -185,6 +204,8 @@ services:
 
   overseerr:
     image: cr.hotio.dev/hotio/overseerr:nightly
+    networks:
+      - main
     container_name: overseerr
     ports:
       - 5055:5055
@@ -197,6 +218,6 @@ services:
       - ${ROOT_DIR}/docker/overseerr-config:/config
 
 networks:
-  default:
-    name: main
+  main:
+    driver: bridge
     external: true
