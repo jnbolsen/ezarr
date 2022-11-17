@@ -54,7 +54,7 @@ services:
       - UMASK=002
       - TZ=${TIMEZONE}
     volumes:
-      - ${ROOT_DIR}/docker/radarr-config:/config
+      - ${ROOT_DIR}/docker/radarr1-config:/config
       - ${SHARE_DIR}/data:/data
     restart: unless-stopped
 
@@ -73,7 +73,7 @@ services:
       - UMASK=002
       - TZ=${TIMEZONE}
     volumes:
-      - ${ROOT_DIR}/docker/radarr-config:/config
+      - ${ROOT_DIR}/docker/radarr2-config:/config
       - ${SHARE_DIR}/data:/data
     restart: unless-stopped
 
