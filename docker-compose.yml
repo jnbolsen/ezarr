@@ -22,7 +22,7 @@ services:
     image: cr.hotio.dev/hotio/tautulli:testing
     container_name: tautulli
     networks:
-      - main
+      - default
     depends_on:
       - plex
     ports:
@@ -42,7 +42,7 @@ services:
     image: cr.hotio.dev/hotio/radarr:nightly
     container_name: radarr1
     networks:
-      - main
+      - default
     ports:
       - 7878:7878
     environment:
@@ -59,7 +59,7 @@ services:
     image: cr.hotio.dev/hotio/radarr:nightly
     container_name: radarr2
     networks:
-      - main
+      - default
     depends_on:
       - radarr1
     ports:
@@ -78,7 +78,7 @@ services:
     image: cr.hotio.dev/hotio/sonarr:v4
     container_name: sonarr
     networks:
-      - main
+      - default
     ports:
       - 8989:8989
     environment:
@@ -95,7 +95,7 @@ services:
     image: cr.hotio.dev/hotio/lidarr:nightly
     container_name: lidarr
     networks:
-      - main
+      - default
     ports:
       - 8686:8686
     environment:
@@ -112,7 +112,7 @@ services:
     image: cr.hotio.dev/hotio/readarr:nightly
     container_name: readarr
     networks:
-      - main
+      - default
     ports:
       - 8787:8787
     environment:
@@ -129,7 +129,7 @@ services:
     image: cr.hotio.dev/hotio/prowlarr:nightly
     container_name: prowlarr
     networks:
-      - main
+      - default
     ports:
       - 9696:9696
     environment:
@@ -145,7 +145,7 @@ services:
     container_name: bazarr1
     image: cr.hotio.dev/hotio/bazarr:nightly
     networks:
-      - main
+      - default
     ports:
       - 6767:6767
     environment:
@@ -160,7 +160,7 @@ services:
     container_name: bazarr2
     image: cr.hotio.dev/hotio/bazarr:ngihtly
     networks:
-      - main
+      - default
     ports:
       - 6768:6767
     environment:
@@ -175,7 +175,7 @@ services:
     image: cr.hotio.dev/hotio/qbittorrent:latest
     container_name: qbittorrent
     networks:
-      - main
+      - default
     ports:
       - 8080:8080
       - 8118:8118
@@ -204,7 +204,7 @@ services:
   overseerr:
     image: cr.hotio.dev/hotio/overseerr:nightly
     networks:
-      - main
+      - default
     container_name: overseerr
     ports:
       - 5055:5055
@@ -217,6 +217,6 @@ services:
       - ${ROOT_DIR}/docker/overseerr-config:/config
 
 networks:
-  main:
+  default:
     driver: bridge
     external: true
