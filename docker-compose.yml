@@ -17,7 +17,7 @@ services:
       - PLEX_CLAIM=${PLEX_CLAIM}
     volumes:
       - ${ROOT_DIR}/docker/plex-config:/config
-      - ${ROOT_DIR}/data/media:/data/media
+      - ${SHARE_DIR}/data/media:/data/media
     restart: unless-stopped
 
   tautulli:
@@ -50,7 +50,7 @@ services:
       - TZ=${TIMEZONE}
     volumes:
       - ${ROOT_DIR}/docker/radarr-config:/config
-      - ${ROOT_DIR}/data:/data
+      - ${SHARE_DIR}/data:/data
     restart: unless-stopped
 
   radarr2:
@@ -67,7 +67,7 @@ services:
       - TZ=${TIMEZONE}
     volumes:
       - ${ROOT_DIR}/docker/radarr-config:/config
-      - ${ROOT_DIR}/data:/data
+      - ${SHARE_DIR}/data:/data
     restart: unless-stopped
 
   sonarr:
@@ -82,7 +82,7 @@ services:
       - TZ=${TIMEZONE}
     volumes:
       - ${ROOT_DIR}/docker/sonarr-config:/config
-      - ${ROOT_DIR}/data:/data
+      - ${SHARE_DIR}/data:/data
     restart: unless-stopped
 
   lidarr:
@@ -97,7 +97,7 @@ services:
       - TZ=${TIMEZONE}
     volumes:
       - ${ROOT_DIR}/docker/lidarr-config:/config
-      - ${ROOT_DIR}/data:/data
+      - ${SHARE_DIR}/data:/data
     restart: unless-stopped
 
   readarr:
@@ -112,7 +112,7 @@ services:
       - TZ=${TIMEZONE}
     volumes:
       - ${ROOT_DIR}/docker/readarr-config:/config
-      - ${ROOT_DIR}/data:/data
+      - ${SHARE_DIR}/data:/data
     restart: unless-stopped
 
   prowlarr:
@@ -175,7 +175,7 @@ services:
       - PRIVOXY_ENABLED=false
     volumes:
       - ${ROOT_DIR}/docker/qbittorrent-config:/config
-      - ${ROOT_DIR}/data/torrents:/data/torrents
+      - ${SHARE_DIR}/data/torrents:/data/torrents
     cap_add:
       - NET_ADMIN
     sysctls:
