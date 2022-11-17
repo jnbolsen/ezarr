@@ -5,6 +5,8 @@ services:
     container_name: plex
     networks:
       - main
+    ports:
+      - 32400:32400
     environment:
       - PUID=${UID}
       - PGID=13000
