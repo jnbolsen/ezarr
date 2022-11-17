@@ -3,16 +3,13 @@ services:
   plex:
     image: cr.hotio.dev/plex:latest
     container_name: plex
-    networks:
-      - main
-    ports:
-      - 32400:32400
+    network_mode: host
     environment:
       - PUID=${UID}
       - PGID=13000
       - UMASK=002
       - TZ=${TIMEZONE}
-      - ADVERTISE_IP=http://192.168.53.232:32400,https://plex.jnbolsen.com
+      - ADVERTISE_IP=https://plex.jnbolsen.com
       - ALLOWED_NETWORKS
       - PLEX_PASS=no
       - PLEX_CLAIM=${PLEX_CLAIM}
