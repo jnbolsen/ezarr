@@ -21,8 +21,9 @@ crash*. It doesn't necessarily mean it will run well on your system. It features
 - [Prowlarr](https://wiki.servarr.com/prowlarr) - Keeps track of indexers, which are services that
   keep track of Torrent or UseNet links.
 - [Jackett](https://github.com/Jackett/Jackett) (currently not used) - Alternative to Prowlarr. 
-- [qBittorrent](https://www.qbittorrent.org/) - Torrent downloader, but provides a bunch more
+- [qBittorrent](https://www.qbittorrent.org/) - Torrent downloader. Also provides a bunch more
   features for management.
+- [NZBGet](https://nzbget.net/) - Usenet downloader.
 - [PleX](https://www.plex.tv/) - Mediaserver. Using this, you get access to a Netflix-like
   interface across many devices like your laptop or computer, phone, TV and more. For
   some features, you need a [PleX pass](https://www.plex.tv/nl/plex-pass/).
