@@ -1,7 +1,7 @@
 # EZARR
 [![Check running](https://github.com/Luctia/ezarr/actions/workflows/check_running.yml/badge.svg)](https://github.com/Luctia/ezarr/actions/workflows/check_running.yml)
 
-This is a fork from Luctia/ezarr, tailored for my personal use.
+This is a fork from [Luctia/ezarr](https://github.com/Luctia/ezarr), tailored for my personal use.
 
 Ezarr is a project built to make it easy (EZ) to deploy a Servarr mediacenter on an Ubuntu server with
 the proper permissions and setup as listed in this [Docker Guide](https://wiki.servarr.com/docker-guide).
