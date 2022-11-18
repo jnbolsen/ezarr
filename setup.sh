@@ -27,7 +27,6 @@ sudo usermod -a -G mediacenter overseerr
 
 # Make directories
 sudo mkdir -pv docker/{radarr1,radarr2,sonarr,lidarr,readarr,prowlarr,bazarr1,bazarr2,qbittorrent,nzbget,overseerr}-config
-sudo mkdir -pv data/{usenet,torrents,media}/{series,movies,music,books}
 # Need to mount network share to unraid or truenas VM
 
 # Set permissions
