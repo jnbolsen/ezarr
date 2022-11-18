@@ -31,6 +31,12 @@ crash*. It doesn't necessarily mean it will run well on your system. It features
 - [Jellyfin](https://jellyfin.org/) (currently not used) - For and alternative to PleX. Which one you'd like to use is a matter
   of preference. You *could* even use both, although is probably a waste of resources.
 
+## Prerequisites
+1. The following packages are installed:
+  - cifs using '$ sudo apt install cifs-utils'.
+  - qemu-agent (for proxmox) using '$ sudo apt install qemu-guest-agent' then '$ systemctl start qemu-guest-agent' (or reboot).
+
+
 ## Using
 1. To get started, clone the repository in a directory of your choosing. **Note: this will be where
    your installation and media will be as well, so think about this a bit.**
