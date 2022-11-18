@@ -15,7 +15,7 @@ services:
       - PLEX_CLAIM=${PLEX_CLAIM}
     volumes:
       - ${ROOT_DIR}/docker/plex-config:/config
-      - ${SHARE_DIR}/data/media:/data/media
+      - ${ROOT_DIR}/data/media:/data/media
     restart: unless-stopped
 
   tautulli:
@@ -52,7 +52,7 @@ services:
       - TZ=${TIMEZONE}
     volumes:
       - ${ROOT_DIR}/docker/radarr1-config:/config
-      - ${SHARE_DIR}/data:/data
+      - ${ROOT_DIR}/data:/data
     restart: unless-stopped
 
   radarr2:
@@ -71,7 +71,7 @@ services:
       - TZ=${TIMEZONE}
     volumes:
       - ${ROOT_DIR}/docker/radarr2-config:/config
-      - ${SHARE_DIR}/data:/data
+      - ${ROOT_DIR}/data:/data
     restart: unless-stopped
 
   sonarr:
@@ -88,7 +88,7 @@ services:
       - TZ=${TIMEZONE}
     volumes:
       - ${ROOT_DIR}/docker/sonarr-config:/config
-      - ${SHARE_DIR}/data:/data
+      - ${ROOT_DIR}/data:/data
     restart: unless-stopped
 
   lidarr:
@@ -105,7 +105,7 @@ services:
       - TZ=${TIMEZONE}
     volumes:
       - ${ROOT_DIR}/docker/lidarr-config:/config
-      - ${SHARE_DIR}/data:/data
+      - ${ROOT_DIR}/data:/data
     restart: unless-stopped
 
   readarr:
@@ -122,7 +122,7 @@ services:
       - TZ=${TIMEZONE}
     volumes:
       - ${ROOT_DIR}/docker/readarr-config:/config
-      - ${SHARE_DIR}/data:/data
+      - ${ROOT_DIR}/data:/data
     restart: unless-stopped
 
   prowlarr:
@@ -155,6 +155,7 @@ services:
       - TZ=${TIMEZONE}
     volumes:
       - ${ROOT_DIR}/docker/bazarr1-config:/config
+    restart: unless-stopped
 
   bazarr2:
     container_name: bazarr2
@@ -170,6 +171,7 @@ services:
       - TZ=${TIMEZONE}
     volumes:
       - ${ROOT_DIR}/docker/bazarr2-config:/config
+    restart: unless-stopped
 
   qbittorrent:
     image: cr.hotio.dev/hotio/qbittorrent:latest
@@ -193,12 +195,28 @@ services:
       - PRIVOXY_ENABLED=false
     volumes:
       - ${ROOT_DIR}/docker/qbittorrent-config:/config
-      - ${SHARE_DIR}/data/torrents:/data/torrents
+      - ${ROOT_DIR}/data/torrents:/data/torrents
     cap_add:
       - NET_ADMIN
     sysctls:
       - net.ipv4.conf.all.src_valid_mark=1
       - net.ipv6.conf.all.disable_ipv6=1
+    restart: unless-stopped
+
+  nzbget:
+    image: cr.hotio.dev/hotio/nzbget:latest
+    container_name: nzbget
+    networks:
+      - default
+    ports:
+      - 6789:6789
+    environment:
+      - PUID=13010
+      - PGID=13000
+      - UMASK=002
+      - TZ=${TIMEZONE}
+    volumes:
+      - ${ROOT_DIR}/data/usenet:/data/usenet
     restart: unless-stopped
 
   overseerr:
@@ -209,12 +227,13 @@ services:
     ports:
       - 5055:5055
     environment:
-      - PUID=13010
+      - PUID=13011
       - PGID=13000
       - UMASK=002
       - TZ=${TIMEZONE}
     volumes:
       - ${ROOT_DIR}/docker/overseerr-config:/config
+    restart: unless-stopped
 
 networks:
   default:
