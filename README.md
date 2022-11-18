@@ -5,8 +5,8 @@ This is a fork from [Luctia/ezarr](https://github.com/Luctia/ezarr), tailored fo
 
 Ezarr is a project built to make it easy (EZ) to deploy a Servarr mediacenter on an Ubuntu server with
 the proper permissions and setup as listed in this [Docker Guide](https://wiki.servarr.com/docker-guide).
-The badge above means that the shell script and docker-compose file in this repository at least *don't
-crash*. It doesn't necessarily mean it will run well on your system. It features:
+The badge above means that the shell script and docker-compose file in this repository at least will *not
+crash*, however doesn't necessarily mean it will run well on your system. It features:
 - [Sonarr](https://sonarr.tv/) - An application to manage TV shows. It is capable of keeping track
   of what you'd like to watch, at what quality, in which language and more. Used in conjunction with
   applications like qBittorrent and Prowlarr (see below), it provides easy searchign and colleciton
