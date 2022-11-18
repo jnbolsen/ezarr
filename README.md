@@ -1,7 +1,7 @@
 # EZARR
 [![Check running](https://github.com/Luctia/ezarr/actions/workflows/check_running.yml/badge.svg)](https://github.com/Luctia/ezarr/actions/workflows/check_running.yml)
 
-This is a fork form Luctia/ezarr, tailored for my personal use.
+This is a fork from Luctia/ezarr, tailored for my personal use.
 
 Ezarr is a project built to make it easy (EZ) to deploy a Servarr mediacenter on an Ubuntu server with
 the proper permissions and setup as listed in this [Docker Guide](https://wiki.servarr.com/docker-guide).
@@ -15,12 +15,12 @@ crash*. It doesn't necessarily mean it will run well on your system. It features
 - [Radarr](https://radarr.video/) - Like Sonarr, but for movies.
 - [Lidarr](https://lidarr.audio/) - Like Sonarr, but for music.
 - [Readarr](https://readarr.com/) - Like Sonarr, but for books.
-- [Mylar3](https://github.com/mylar3/mylar3) - Like Sonarr, but for comic books. This one is a bit
+- [Mylar3](https://github.com/mylar3/mylar3) (currently not used) - Like Sonarr, but for comic books. This one is a bit
   tricky to set up, so do so at your own risk. You'll have to add an API key within Mylar3 yourself
   to connect to other apps, particularly Prowlarr.
 - [Prowlarr](https://wiki.servarr.com/prowlarr) - Keeps track of indexers, which are services that
   keep track of Torrent or UseNet links.
-- [Jackett](https://github.com/Jackett/Jackett) - Alternative to Prowlarr. 
+- [Jackett](https://github.com/Jackett/Jackett) (currently not used) - Alternative to Prowlarr. 
 - [qBittorrent](https://www.qbittorrent.org/) - Torrent downloader, but provides a bunch more
   features for management.
 - [PleX](https://www.plex.tv/) - Mediaserver. Using this, you get access to a Netflix-like
@@ -28,7 +28,7 @@ crash*. It doesn't necessarily mean it will run well on your system. It features
   some features, you need a [PleX pass](https://www.plex.tv/nl/plex-pass/).
 - [Tautulli](https://tautulli.com/) - Monitoring application for PleX which can keep track of
   what has been watched, who watched it, when and where they watched it, and how it was watched.
-- [Jellyfin](https://jellyfin.org/) - For and alternative to PleX. Which one you'd like to use is a matter
+- [Jellyfin](https://jellyfin.org/) (currently not used) - For and alternative to PleX. Which one you'd like to use is a matter
   of preference. You *could* even use both, although is probably a waste of resources.
 
 ## Using
