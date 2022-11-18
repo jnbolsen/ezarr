@@ -33,8 +33,8 @@ crash*. It doesn't necessarily mean it will run well on your system. It features
 
 ## Prerequisites
 1. The following packages are installed:
-  - cifs using '$ sudo apt install cifs-utils'.
-  - qemu-agent (for proxmox) using '$ sudo apt install qemu-guest-agent' then '$ systemctl start qemu-guest-agent' (or reboot).
+  - cifs using `$ sudo apt install cifs-utils`.
+  - qemu-agent (for proxmox) using `$ sudo apt install qemu-guest-agent` then `$ systemctl start qemu-guest-agent` (or reboot).
 
 
 ## Using
