@@ -30,8 +30,6 @@ sudo mkdir -pv docker/{radarr1,radarr2,sonarr,lidarr,readarr,prowlarr,bazarr1,ba
 # Need to mount network share to unraid or truenas VM
 
 # Set permissions
-sudo chmod -R 775 data/
-sudo chown -R $(id -u):mediacenter data/
 sudo chown -R radarr1:mediacenter docker/radarr1-config
 sudo chown -R radarr2:mediacenter docker/radarr2-config
 sudo chown -R sonarr:mediacenter docker/sonarr-config
