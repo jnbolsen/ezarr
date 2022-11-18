@@ -1,35 +1,35 @@
 # EZARR
 [![Check running](https://github.com/Luctia/ezarr/actions/workflows/check_running.yml/badge.svg)](https://github.com/Luctia/ezarr/actions/workflows/check_running.yml)
 
-Ezarr is a project built to make it EZ to deploy a Servarr mediacenter on an Ubuntu server. The
-badge above means that the shell script and docker-compose file in this repository at least *don't
-crash*. It doesn't necessarily mean it will run well on your system ;) It features:
-- [Sonarr](https://sonarr.tv/) is an application to manage TV shows. It is capable of keeping track
-  of what you'd like to watch, at what quality, in which language and more, and can find a place to
-  download this if connected to Prowlarr and qBittorrent. It can also reorganize the media you
-  already own in order to create a more uniformly formatted collection.
-- [Radarr](https://radarr.video/) is like Sonarr, but for movies.
-- [Lidarr](https://lidarr.audio/) is like Sonarr, but for music.
-- [Readarr](https://readarr.com/) is like Sonarr, but for books.
-- [Mylar3](https://github.com/mylar3/mylar3) is like Sonarr, but for comic books. This one is a bit
-  tricky to set up, so do so at your own risk. In order to connect this to your Prowlarr container,
-  the process within Prowlarr is the same as for the other containers (add app). You'll have to add
-  an API key within Mylar3, yourself.
-- [Prowlarr](https://wiki.servarr.com/prowlarr) can keep track of indexers, which are services that
-  keep track of Torrent or UseNet links. One can search an indexer for certain content and find a
-  where to download this. **Note**: when adding an indexer, please do not set the "seed ratio" to
-  less than 1. Less than 1 means that you upload less than you download. Not only is this
-  unfriendly towards your fellow users, but it can also get you banned from certain indexers.
-- [Jackett](https://github.com/Jackett/Jackett) is an alternative to Prowlarr. 
-- [qBittorrent](https://www.qbittorrent.org/) can download torrents and provides a bunch more
+This is a fork form Luctia/ezarr, tailored for my personal use.
+
+Ezarr is a project built to make it easy (EZ) to deploy a Servarr mediacenter on an Ubuntu server with
+the proper permissions and setup as listed in this [Docker Guide](https://wiki.servarr.com/docker-guide).
+The badge above means that the shell script and docker-compose file in this repository at least *don't
+crash*. It doesn't necessarily mean it will run well on your system. It features:
+- [Sonarr](https://sonarr.tv/) - An application to manage TV shows. It is capable of keeping track
+  of what you'd like to watch, at what quality, in which language and more. Used in conjunction with
+  applications like qBittorrent and Prowlarr (see below), it provides easy searchign and colleciton
+  management. It can also reorganize the media you already own in order to create a more uniformly
+  formatted collection.
+- [Radarr](https://radarr.video/) - Like Sonarr, but for movies.
+- [Lidarr](https://lidarr.audio/) - Like Sonarr, but for music.
+- [Readarr](https://readarr.com/) - Like Sonarr, but for books.
+- [Mylar3](https://github.com/mylar3/mylar3) - Like Sonarr, but for comic books. This one is a bit
+  tricky to set up, so do so at your own risk. You'll have to add an API key within Mylar3 yourself
+  to connect to other apps, particularly Prowlarr.
+- [Prowlarr](https://wiki.servarr.com/prowlarr) - Keeps track of indexers, which are services that
+  keep track of Torrent or UseNet links.
+- [Jackett](https://github.com/Jackett/Jackett) - Alternative to Prowlarr. 
+- [qBittorrent](https://www.qbittorrent.org/) - Torrent downloader, but provides a bunch more
   features for management.
-- [PleX](https://www.plex.tv/) is a mediaserver. Using this, you get access to a Netflix-like
-  interface across many devices like your laptop or computer, your phone, your TV and more. For
+- [PleX](https://www.plex.tv/) - Mediaserver. Using this, you get access to a Netflix-like
+  interface across many devices like your laptop or computer, phone, TV and more. For
   some features, you need a [PleX pass](https://www.plex.tv/nl/plex-pass/).
-- [Tautulli](https://tautulli.com/) is a monitoring application for PleX  which can keep track of
+- [Tautulli](https://tautulli.com/) - Monitoring application for PleX which can keep track of
   what has been watched, who watched it, when and where they watched it, and how it was watched.
-- [Jellyfin](https://jellyfin.org/) is an alternative for PleX. Which you'd like to use is a matter
-  of preference, and you *could* even use both, although this is probably a waste of resources.
+- [Jellyfin](https://jellyfin.org/) - For and alternative to PleX. Which one you'd like to use is a matter
+  of preference. You *could* even use both, although is probably a waste of resources.
 
 ## Using
 1. To get started, clone the repository in a directory of your choosing. **Note: this will be where
@@ -44,14 +44,10 @@ crash*. It doesn't necessarily mean it will run well on your system ;) It featur
    out by placing `#` in front of the lines. This ensures they are ignored by Docker compose.
 6. Run `docker compose up`.
 
-That's it! Your containers are now up and you can continue to set up the settings in them. Take
+That's it! Your containers are now running and you can continue to set up the settings in them. Take
 note of the following:
 - When linking one service to another, remember to use the container name instead of `localhost`.
-- Please set the settings of the -arr containers as soon as possible to the following (use
-  advanced):
-  - Media management:
-    - Use hardlinks instead of Copy: `true`
-    - Root folder: `/data/media/` and then tv, movies or music depending on service
+- Use [TRaSH Guides](https://trash-guides.info/) for help in optimizing the -arr suite, plex, and qbittorrent.
 - In qBittorrent, after connecting it to the -arr services, you can indicate it should move
   torrents in certain categories to certain directories, like torrents in the `radarr` category
   to `/data/torrents/movies`. You should do this. Also set the `Default Save Path` to
@@ -59,17 +55,3 @@ note of the following:
   field: `chmod -R 775 "%F/"`.
 - You'll have to add indexers in Prowlarr by hand. Use Prowlarrs settings to connect it to the
   other -arr apps.
-
-## FAQ
-
-### Why do I need to set some settings myself, can that be added?
-Some settings, particularly for the Servarr suite, are set in databases. While it *might* be
-possible to interact with this database after creation, I'd rather not touch these. It's not
-that difficult to set them yourself, and quite difficult to do it automatically. For other
-containers, configuration files are automatically generated, so these are more easily edited,
-but I currently don't believe this is worth the effort.
-
-On top of the above, connecting the containers above would mean setting a password and creating an
-API key for all of them. This would lead to everyone using Ezarr having the same API key and user/
-password combination. Personally, I'd rather trust users to figure this out on their own rather
-than trusting them to change these passwords and keys.
