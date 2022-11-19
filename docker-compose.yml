@@ -1,7 +1,7 @@
 services:
 # MEDIA SERVER  
   plex:
-    image: cr.hotio.dev/plex:latest
+    image: cr.hotio.dev/hotio/plex:latest
     container_name: plex
     network_mode: host
     environment:
@@ -159,7 +159,7 @@ services:
 
   bazarr2:
     container_name: bazarr2
-    image: cr.hotio.dev/hotio/bazarr:ngihtly
+    image: cr.hotio.dev/hotio/bazarr:nightly
     networks:
       - mediacenter
     ports:
