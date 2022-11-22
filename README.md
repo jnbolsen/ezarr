@@ -34,8 +34,12 @@ crash*, however doesn't necessarily mean it will run well on your system. It fea
 
 ## Prerequisites
 1. The following packages are installed:
-  - cifs using `$ sudo apt install cifs-utils`.
-  - qemu-agent (for proxmox) using `$ sudo apt install qemu-guest-agent` then `$ systemctl start qemu-guest-agent` (or reboot).
+  - sudo
+  - cifs (for mounting smb shares).
+  - qemu-agent (for proxmox).
+  - curl.
+  
+`$ apt install cifs-utils sudo qemu-guest-agent curl`
 
 
 ## Using
