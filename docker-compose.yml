@@ -14,8 +14,8 @@ services:
       - PLEX_PASS=no
       - PLEX_CLAIM=${PLEX_CLAIM}
     volumes:
-      - ${ROOT_DIR}/docker/plex-config:/config
-      - ${ROOT_DIR}/data/media:/data/media
+      - ${CONFIG_DIR}/plex-config:/config
+      - ${DATA_DIR}/media:/data/media
     restart: unless-stopped
 
   tautulli:
@@ -33,7 +33,7 @@ services:
       - UMASK=002
       - TZ=${TIMEZONE}
     volumes:
-      - ${ROOT_DIR}/docker/tautulli-config:/config
+      - ${CONFIG_DIR}/tautulli-config:/config
     restart: unless-stopped
 
 
@@ -46,13 +46,13 @@ services:
     ports:
       - 7878:7878
     environment:
-      - PUID=13001
+      - PUID=3001
       - PGID=13000
       - UMASK=002
       - TZ=${TIMEZONE}
     volumes:
-      - ${ROOT_DIR}/docker/radarr1-config:/config
-      - ${ROOT_DIR}/data:/data
+      - ${CONFIG_DIR}/radarr1-config:/config
+      - ${DATA_DIR}:/data
     restart: unless-stopped
 
   radarr2:
@@ -65,13 +65,13 @@ services:
     ports:
       - 7879:7878
     environment:
-      - PUID=13002
+      - PUID=3002
       - PGID=13000
       - UMASK=002
       - TZ=${TIMEZONE}
     volumes:
-      - ${ROOT_DIR}/docker/radarr2-config:/config
-      - ${ROOT_DIR}/data:/data
+      - ${CONFIG_DIR}/radarr2-config:/config
+      - ${DATA_DIR}:/data
     restart: unless-stopped
 
   sonarr:
@@ -82,13 +82,13 @@ services:
     ports:
       - 8989:8989
     environment:
-      - PUID=13003
+      - PUID=3003
       - PGID=13000
       - UMASK=002
       - TZ=${TIMEZONE}
     volumes:
-      - ${ROOT_DIR}/docker/sonarr-config:/config
-      - ${ROOT_DIR}/data:/data
+      - ${CONFIG_DIR}/sonarr-config:/config
+      - ${DATA_DIR}:/data
     restart: unless-stopped
 
   lidarr:
@@ -99,13 +99,13 @@ services:
     ports:
       - 8686:8686
     environment:
-      - PUID=13004
+      - PUID=3004
       - PGID=13000
       - UMASK=002
       - TZ=${TIMEZONE}
     volumes:
-      - ${ROOT_DIR}/docker/lidarr-config:/config
-      - ${ROOT_DIR}/data:/data
+      - ${CONFIG_DIR}/lidarr-config:/config
+      - ${DATA_DIR}:/data
     restart: unless-stopped
 
   readarr:
@@ -116,13 +116,13 @@ services:
     ports:
       - 8787:8787
     environment:
-      - PUID=13005
+      - PUID=3005
       - PGID=13000
       - UMASK=002
       - TZ=${TIMEZONE}
     volumes:
-      - ${ROOT_DIR}/docker/readarr-config:/config
-      - ${ROOT_DIR}/data:/data
+      - ${CONFIG_DIR}/readarr-config:/config
+      - ${DATA_DIR}:/data
     restart: unless-stopped
 
   prowlarr:
@@ -133,12 +133,12 @@ services:
     ports:
       - 9696:9696
     environment:
-      - PUID=13006
+      - PUID=3006
       - PGID=13000
       - UMASK=002
       - TZ=${TIMEZONE}
     volumes:
-      - ${ROOT_DIR}/docker/prowlarr-config:/config
+      - ${CONFIG_DIR}/prowlarr-config:/config
     restart: unless-stopped
 
   bazarr1:
@@ -149,12 +149,12 @@ services:
     ports:
       - 6767:6767
     environment:
-      - PUID=13007
+      - PUID=3007
       - PGID=13000
       - UMASK=002
       - TZ=${TIMEZONE}
     volumes:
-      - ${ROOT_DIR}/docker/bazarr1-config:/config
+      - ${CONFIG_DIR}/bazarr1-config:/config
     restart: unless-stopped
 
   bazarr2:
@@ -165,12 +165,12 @@ services:
     ports:
       - 6768:6767
     environment:
-      - PUID=13008
+      - PUID=3008
       - PGID=13000
       - UMASK=002
       - TZ=${TIMEZONE}
     volumes:
-      - ${ROOT_DIR}/docker/bazarr2-config:/config
+      - ${CONFIG_DIR}/bazarr2-config:/config
     restart: unless-stopped
 
   qbittorrent:
@@ -182,7 +182,7 @@ services:
       - 8080:8080
       - 8118:8118
     environment:
-      - PUID=13009
+      - PUID=3009
       - PGID=13000
       - UMASK=002
       - TZ=${TIMEZONE}
@@ -194,8 +194,8 @@ services:
       - VPN_IP_CHECK_EXIT=true
       - PRIVOXY_ENABLED=false
     volumes:
-      - ${ROOT_DIR}/docker/qbittorrent-config:/config
-      - ${ROOT_DIR}/data/torrents:/data/torrents
+      - ${CONFIG_DIR}/qbittorrent-config:/config
+      - ${DATA_DIR}/torrents:/data/torrents
     cap_add:
       - NET_ADMIN
     sysctls:
@@ -211,12 +211,13 @@ services:
     ports:
       - 6789:6789
     environment:
-      - PUID=13010
+      - PUID=3010
       - PGID=13000
       - UMASK=002
       - TZ=${TIMEZONE}
     volumes:
-      - ${ROOT_DIR}/data/usenet:/data/usenet
+      - ${CONFIG_DIR}/nzbget-config:/config
+      - ${DATA_DIR}/usenet:/data/usenet
     restart: unless-stopped
 
   overseerr:
@@ -227,15 +228,14 @@ services:
     ports:
       - 5055:5055
     environment:
-      - PUID=13011
+      - PUID=3011
       - PGID=13000
       - UMASK=002
       - TZ=${TIMEZONE}
     volumes:
-      - ${ROOT_DIR}/docker/overseerr-config:/config
+      - ${CONFIG_DIR}/overseerr-config:/config
     restart: unless-stopped
 
 networks:
   mediacenter:
     driver: bridge
-    external: true
