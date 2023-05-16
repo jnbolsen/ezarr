@@ -12,6 +12,14 @@ sudo useradd nzbget -u 13008
 sudo useradd overseerr -u 13009
 sudo useradd notifiarr -u 13010
 sudo groupadd mediacenter -g 13000
+
+
+# Make directories
+sudo mkdir -pv /docker-config
+
+# Set permissions
+sudo chmod -R 775 /docker-config
+sudo chown -R $(id -u):mediacenter /docker-config
 sudo usermod -aG mediacenter radarr
 sudo usermod -aG mediacenter sonarr
 sudo usermod -aG mediacenter lidarr
