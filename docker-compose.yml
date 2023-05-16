@@ -1,77 +1,62 @@
 services:
-# MEDIA SERVER  
+# MEDIA SERVER
   plex:
-    image: cr.hotio.dev/hotio/plex:latest
+    image: cr.hotio.dev/hotio/plex
     container_name: plex
     network_mode: host
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
     environment:
       - PUID=${UID}
       - PGID=13000
       - UMASK=002
       - TZ=${TIMEZONE}
       - ADVERTISE_IP=https://plex.jnbolsen.com
-      - ALLOWED_NETWORKS
+      - ALLOWED_NETWORKS=
       - PLEX_PASS=no
       - PLEX_CLAIM=${PLEX_CLAIM}
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,video,utility
     volumes:
-      - ${CONFIG_DIR}/plex-config:/config
-      - ${DATA_DIR}/media:/data/media
+      - ${CONFIG_DIR}/plex:/config
+      - ${DATA_DIR}/files:/files
+      - /dev/shm/plex:/transcode
     restart: unless-stopped
 
   tautulli:
     image: cr.hotio.dev/hotio/tautulli:testing
     container_name: tautulli
-    networks:
-      - mediacenter
+    network_mode: host
     depends_on:
       - plex
-    ports:
-      - 8181:8181
     environment:
       - PUID=${UID}
       - PGID=13000
       - UMASK=002
       - TZ=${TIMEZONE}
     volumes:
-      - ${CONFIG_DIR}/tautulli-config:/config
+      - ${CONFIG_DIR}/tautulli:/config
     restart: unless-stopped
 
-
 # SERVARR
-  radarr1:
+  radarr:
     image: cr.hotio.dev/hotio/radarr:nightly
-    container_name: radarr1
+    container_name: radarr
     networks:
       - mediacenter
     ports:
       - 7878:7878
     environment:
-      - PUID=3001
+      - PUID=13011
       - PGID=13000
       - UMASK=002
       - TZ=${TIMEZONE}
     volumes:
-      - ${CONFIG_DIR}/radarr1-config:/config
-      - ${DATA_DIR}:/data
-    restart: unless-stopped
-
-  radarr2:
-    image: cr.hotio.dev/hotio/radarr:nightly
-    container_name: radarr2
-    networks:
-      - mediacenter
-    depends_on:
-      - radarr1
-    ports:
-      - 7879:7878
-    environment:
-      - PUID=3002
-      - PGID=13000
-      - UMASK=002
-      - TZ=${TIMEZONE}
-    volumes:
-      - ${CONFIG_DIR}/radarr2-config:/config
-      - ${DATA_DIR}:/data
+      - ${CONFIG_DIR}/radarr:/config
+      - ${DATA_DIR}:/media
     restart: unless-stopped
 
   sonarr:
@@ -82,13 +67,13 @@ services:
     ports:
       - 8989:8989
     environment:
-      - PUID=3003
+      - PUID=13002
       - PGID=13000
       - UMASK=002
       - TZ=${TIMEZONE}
     volumes:
-      - ${CONFIG_DIR}/sonarr-config:/config
-      - ${DATA_DIR}:/data
+      - ${CONFIG_DIR}/sonarr:/config
+      - ${DATA_DIR}:/media
     restart: unless-stopped
 
   lidarr:
@@ -99,13 +84,13 @@ services:
     ports:
       - 8686:8686
     environment:
-      - PUID=3004
+      - PUID=13003
       - PGID=13000
       - UMASK=002
       - TZ=${TIMEZONE}
     volumes:
-      - ${CONFIG_DIR}/lidarr-config:/config
-      - ${DATA_DIR}:/data
+      - ${CONFIG_DIR}/lidarr:/config
+      - ${DATA_DIR}:/media
     restart: unless-stopped
 
   readarr:
@@ -116,13 +101,13 @@ services:
     ports:
       - 8787:8787
     environment:
-      - PUID=3005
+      - PUID=13004
       - PGID=13000
       - UMASK=002
       - TZ=${TIMEZONE}
     volumes:
-      - ${CONFIG_DIR}/readarr-config:/config
-      - ${DATA_DIR}:/data
+      - ${CONFIG_DIR}/readarr:/config
+      - ${DATA_DIR}:/media
     restart: unless-stopped
 
   prowlarr:
@@ -133,44 +118,29 @@ services:
     ports:
       - 9696:9696
     environment:
-      - PUID=3006
+      - PUID=13005
       - PGID=13000
       - UMASK=002
       - TZ=${TIMEZONE}
     volumes:
-      - ${CONFIG_DIR}/prowlarr-config:/config
+      - ${CONFIG_DIR}/prowlarr:/config
     restart: unless-stopped
 
-  bazarr1:
-    container_name: bazarr1
+  bazarr:
+    container_name: bazarr
     image: cr.hotio.dev/hotio/bazarr:nightly
     networks:
       - mediacenter
     ports:
       - 6767:6767
     environment:
-      - PUID=3007
+      - PUID=13006
       - PGID=13000
       - UMASK=002
       - TZ=${TIMEZONE}
     volumes:
-      - ${CONFIG_DIR}/bazarr1-config:/config
-    restart: unless-stopped
-
-  bazarr2:
-    container_name: bazarr2
-    image: cr.hotio.dev/hotio/bazarr:nightly
-    networks:
-      - mediacenter
-    ports:
-      - 6768:6767
-    environment:
-      - PUID=3008
-      - PGID=13000
-      - UMASK=002
-      - TZ=${TIMEZONE}
-    volumes:
-      - ${CONFIG_DIR}/bazarr2-config:/config
+      - ${CONFIG_DIR}/bazarr:/config
+      - ${DATA_DIR}:/media
     restart: unless-stopped
 
   qbittorrent:
@@ -182,25 +152,25 @@ services:
       - 8080:8080
       - 8118:8118
     environment:
-      - PUID=3009
+      - PUID=13007
       - PGID=13000
       - UMASK=002
       - TZ=${TIMEZONE}
       - VPN_ENABLED=true
-      - VPN_LAN_NETWORK=192.168.53.0/24
+      - VPN_LAN_NETWORK=192.168.20.0/24
       - VPN_CONF=wg0
       - VPN_ADDITIONAL_PORTS
       - VPN_IP_CHECK_DELAY=5
       - VPN_IP_CHECK_EXIT=true
       - PRIVOXY_ENABLED=false
     volumes:
-      - ${CONFIG_DIR}/qbittorrent-config:/config
-      - ${DATA_DIR}/torrents:/data/torrents
+      - ${CONFIG_DIR}/qbittorrent:/config
+      - ${DATA_DIR}/torrents:/media/torrents
+      - ${DOWNLOAD_DIR}/torrents:/download/torrents
     cap_add:
       - NET_ADMIN
     sysctls:
       - net.ipv4.conf.all.src_valid_mark=1
-      - net.ipv6.conf.all.disable_ipv6=1
     restart: unless-stopped
 
   nzbget:
@@ -211,13 +181,14 @@ services:
     ports:
       - 6789:6789
     environment:
-      - PUID=3010
+      - PUID=13008
       - PGID=13000
       - UMASK=002
       - TZ=${TIMEZONE}
     volumes:
-      - ${CONFIG_DIR}/nzbget-config:/config
-      - ${DATA_DIR}/usenet:/data/usenet
+      - ${CONFIG_DIR}/nzbget:/config
+      - ${DATA_DIR}/usenet:/media/usenet
+      - ${DOWNLOAD_DIR}/usenet:/download/usenet
     restart: unless-stopped
 
   overseerr:
@@ -228,12 +199,30 @@ services:
     ports:
       - 5055:5055
     environment:
-      - PUID=3011
+      - PUID=13009
       - PGID=13000
       - UMASK=002
       - TZ=${TIMEZONE}
     volumes:
-      - ${CONFIG_DIR}/overseerr-config:/config
+      - ${CONFIG_DIR}/overseerr:/config
+    restart: unless-stopped
+
+  notifiarr:
+    image: golift/notifiarr
+    networks:
+      - mediacenter
+    container_name: notifiarr
+    environment:
+      - PUID=13010
+      - PGID=13000
+      - UMASK=002
+      - TZ=${TIMEZONE}
+    ports:
+      - 5454:5454
+    volumes:
+      - ${CONFIG_DIR}/notifiarr:/config
+      - /var/run/utmp:/var/run/utmp
+      - /etc/machine-id:/etc/machine-id
     restart: unless-stopped
 
 networks:
