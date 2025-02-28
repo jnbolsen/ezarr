@@ -27,7 +27,7 @@ sudo usermod -aG mediacenter readarr
 sudo usermod -aG mediacenter prowlarr
 sudo usermod -aG mediacenter bazarr
 sudo usermod -aG mediacenter qbittorrent
-sudo usermod -aG mediacenter nzbget
+sudo usermod -aG mediacenter sabnzbd
 sudo usermod -aG mediacenter overseerr
 sudo usermod -aG mediacenter notifiarr
 
