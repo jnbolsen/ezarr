@@ -19,7 +19,7 @@ crash*, however doesn't necessarily mean it will run well on your system. It fea
   keep track of Torrent or UseNet links.
 - [qBittorrent](https://www.qbittorrent.org/) - Torrent downloader. Also provides a bunch more
   features for management.
-- [NZBGet](https://nzbget.net/) - Usenet downloader.
+- [SABnzbd](https://sabnzbd.org/) - Usenet downloader.
 - [Overseerr](https://overseerr.dev/) - Request manager for the arr suite.
 - [Notifiarr](https://notifiarr.com/guest/login) - Client that connects to TRaSH Guides for automatic radarr and sonarr profile and quality updates (can do many other things too).
 - [PleX](https://www.plex.tv/) - Mediaserver. Using this, you get access to a Netflix-like
