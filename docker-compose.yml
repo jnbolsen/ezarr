@@ -1,7 +1,7 @@
 services:
-# MEDIA SERVER
+# MEDIA SERVER  
   plex:
-    image: cr.hotio.dev/hotio/plex
+    image: ghcr.io/hotio/plex
     container_name: plex
     network_mode: host
     deploy:
@@ -14,10 +14,11 @@ services:
       - PGID=13000
       - UMASK=002
       - TZ=${TIMEZONE}
-      - ADVERTISE_IP=https://plex.jnbolsen.com
-      - ALLOWED_NETWORKS=
-      - PLEX_PASS=no
-      - PLEX_CLAIM=${PLEX_CLAIM}
+      - PLEX_CLAIM_TOKEN=${PLEX_CLAIM}
+      - PLEX_ADVERTISE_URL
+      - PLEX_NO_AUTH_NETWORKS
+      - PLEX_BETA_INSTALL=false
+      - PLEX_PURGE_CODECS=true
       - NVIDIA_VISIBLE_DEVICES=all
       - NVIDIA_DRIVER_CAPABILITIES=compute,video,utility
     volumes:
@@ -27,7 +28,7 @@ services:
     restart: unless-stopped
 
   tautulli:
-    image: cr.hotio.dev/hotio/tautulli:testing
+    image: ghcr.io/hotio/tautulli:testing
     container_name: tautulli
     network_mode: host
     depends_on:
@@ -43,7 +44,7 @@ services:
 
 # SERVARR
   radarr:
-    image: cr.hotio.dev/hotio/radarr:nightly
+    image: ghcr.io/hotio/radarr:nightly
     container_name: radarr
     networks:
       - mediacenter
@@ -60,7 +61,7 @@ services:
     restart: unless-stopped
 
   sonarr:
-    image: cr.hotio.dev/hotio/sonarr:v4
+    image: ghcr.io/hotio/sonarr:nightly
     container_name: sonarr
     networks:
       - mediacenter
@@ -77,7 +78,7 @@ services:
     restart: unless-stopped
 
   lidarr:
-    image: cr.hotio.dev/hotio/lidarr:nightly
+    image: ghcr.io/hotio/lidarr:nightly
     container_name: lidarr
     networks:
       - mediacenter
@@ -94,7 +95,7 @@ services:
     restart: unless-stopped
 
   readarr:
-    image: cr.hotio.dev/hotio/readarr:nightly
+    image: ghcr.io/hotio/readarr:nightly
     container_name: readarr
     networks:
       - mediacenter
@@ -111,7 +112,7 @@ services:
     restart: unless-stopped
 
   prowlarr:
-    image: cr.hotio.dev/hotio/prowlarr:nightly
+    image: ghcr.io/hotio/prowlarr:nightly
     container_name: prowlarr
     networks:
       - mediacenter
@@ -128,7 +129,7 @@ services:
 
   bazarr:
     container_name: bazarr
-    image: cr.hotio.dev/hotio/bazarr:nightly
+    image: ghcr.io/hotio/bazarr:nightly
     networks:
       - mediacenter
     ports:
@@ -144,7 +145,7 @@ services:
     restart: unless-stopped
 
   qbittorrent:
-    image: cr.hotio.dev/hotio/qbittorrent:latest
+    image: ghcr.io/hotio/qbittorrent:latest
     container_name: qbittorrent
     networks:
       - mediacenter
@@ -157,9 +158,9 @@ services:
       - UMASK=002
       - TZ=${TIMEZONE}
       - VPN_ENABLED=true
+      - VPN_PROVIDER=generic
       - VPN_LAN_NETWORK=192.168.20.0/24
       - VPN_CONF=wg0
-      - VPN_ADDITIONAL_PORTS
       - VPN_IP_CHECK_DELAY=5
       - VPN_IP_CHECK_EXIT=true
       - PRIVOXY_ENABLED=false
@@ -173,26 +174,25 @@ services:
       - net.ipv4.conf.all.src_valid_mark=1
     restart: unless-stopped
 
-  nzbget:
-    image: cr.hotio.dev/hotio/nzbget:latest
-    container_name: nzbget
+  sabnzbd:
+    image: ghcr.io/hotio/sabnzbd:latest
+    container_name: sabnzbd
     networks:
       - mediacenter
     ports:
-      - 6789:6789
+      - 8081:8080
     environment:
-      - PUID=13008
+      - PUID=13012
       - PGID=13000
       - UMASK=002
       - TZ=${TIMEZONE}
     volumes:
-      - ${CONFIG_DIR}/nzbget:/config
-      - ${DATA_DIR}/usenet:/media/usenet
+      - ${CONFIG_DIR}/sabnzbd:/config
       - ${DOWNLOAD_DIR}/usenet:/download/usenet
     restart: unless-stopped
 
   overseerr:
-    image: cr.hotio.dev/hotio/overseerr:nightly
+    image: ghcr.io/hotio/overseerr:nightly
     networks:
       - mediacenter
     container_name: overseerr
