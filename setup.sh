@@ -8,7 +8,7 @@ sudo useradd readarr -u 13004
 sudo useradd prowlarr -u 13005
 sudo useradd bazarr -u 13006
 sudo useradd qbittorrent -u 13007
-sudo useradd nzbget -u 13008
+sudo useradd sabnzbd -u 13012
 sudo useradd overseerr -u 13009
 sudo useradd notifiarr -u 13010
 sudo groupadd mediacenter -g 13000
