@@ -29,7 +29,7 @@ crash*, however doesn't necessarily mean it will run well on your system. It fea
   what has been watched, who watched it, when and where they watched it, and how it was watched.
 
 ## Prerequisites
-1. The following packages are installed:
+The following packages are installed:
   - sudo
   - qemu-agent (for proxmox).
   - curl.
