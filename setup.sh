@@ -15,11 +15,11 @@ sudo groupadd mediacenter -g 13000
 
 
 # Make directories
-sudo mkdir -pv /docker-config
+sudo mkdir -pv /home/$USER/docker-config
 
 # Set permissions
-sudo chmod -R 775 /docker-config
-sudo chown -R $(id -u):mediacenter /docker-config
+sudo chmod -R 775 /home/$USER/docker-config
+sudo chown -R $USER:mediacenter /home/$USER/docker-config
 sudo usermod -aG mediacenter radarr
 sudo usermod -aG mediacenter sonarr
 sudo usermod -aG mediacenter lidarr
@@ -30,5 +30,6 @@ sudo usermod -aG mediacenter qbittorrent
 sudo usermod -aG mediacenter sabnzbd
 sudo usermod -aG mediacenter overseerr
 sudo usermod -aG mediacenter notifiarr
+sudo usermod -aG mediacenter $USER
 
 echo "UID=$(id -u)" >> .env
