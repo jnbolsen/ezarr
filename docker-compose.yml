@@ -40,6 +40,11 @@ services:
     environment:
       - PUID=13004
       - PGID=13000
+      - UMASK=002
+      - TZ=${TIMEZONE}
+    volumes:
+      - ${CONFIG_DIR}/tautulli:/config
+    restart: unless-stopped
 
 # SERVARR
   radarr:
