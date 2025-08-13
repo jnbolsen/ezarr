@@ -1,46 +1,45 @@
 services:
-# MEDIA SERVER  
-  plex:
-    image: ghcr.io/hotio/plex
-    container_name: plex
-    network_mode: host
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - capabilities: [gpu]
-    environment:
-      - PUID=${UID}
-      - PGID=13000
-      - UMASK=002
-      - TZ=${TIMEZONE}
-      - PLEX_CLAIM_TOKEN=${PLEX_CLAIM}
-      - PLEX_ADVERTISE_URL
-      - PLEX_NO_AUTH_NETWORKS
-      - PLEX_BETA_INSTALL=false
-      - PLEX_PURGE_CODECS=true
-      - NVIDIA_VISIBLE_DEVICES=all
-      - NVIDIA_DRIVER_CAPABILITIES=compute,video,utility
-    volumes:
-      - ${CONFIG_DIR}/plex:/config
-      - ${DATA_DIR}/files:/files
-      - /dev/shm/plex:/transcode
-    restart: unless-stopped
-
+# MEDIA SERVER
+#  plex:
+#    image: ghcr.io/hotio/plex
+#    container_name: plex
+#    network_mode: host
+#    deploy:
+#      resources:
+#        reservations:
+#          devices:
+#            - capabilities: [gpu]
+#    environment:
+#      - PUID=${UID}
+#      - PGID=13000
+#      - UMASK=002
+#      - TZ=${TIMEZONE}
+#      - PLEX_CLAIM_TOKEN=${PLEX_CLAIM}
+#      - PLEX_ADVERTISE_URL
+#      - PLEX_NO_AUTH_NETWORKS
+#      - PLEX_BETA_INSTALL=false
+#      - PLEX_PURGE_CODECS=true
+#      - NVIDIA_VISIBLE_DEVICES=all
+#      - NVIDIA_DRIVER_CAPABILITIES=compute,video,utility
+#    volumes:
+#      - ${CONFIG_DIR}/plex:/config
+#      - ${DATA_DIR}/files:/files
+#      - /dev/shm:/transcode
+#    restart: unless-stopped
+#
   tautulli:
     image: ghcr.io/hotio/tautulli:testing
     container_name: tautulli
-    network_mode: host
-    depends_on:
-      - plex
+    networks:
+      - mediacenter
+    ports:
+      - 8181:8181
+#    network_mode: host
+#    depends_on:
+#      - plex
     environment:
-      - PUID=${UID}
+      - PUID=13004
       - PGID=13000
-      - UMASK=002
-      - TZ=${TIMEZONE}
-    volumes:
-      - ${CONFIG_DIR}/tautulli:/config
-    restart: unless-stopped
 
 # SERVARR
   radarr:
@@ -94,23 +93,6 @@ services:
       - ${DATA_DIR}:/media
     restart: unless-stopped
 
-  readarr:
-    image: ghcr.io/hotio/readarr:nightly
-    container_name: readarr
-    networks:
-      - mediacenter
-    ports:
-      - 8787:8787
-    environment:
-      - PUID=13004
-      - PGID=13000
-      - UMASK=002
-      - TZ=${TIMEZONE}
-    volumes:
-      - ${CONFIG_DIR}/readarr:/config
-      - ${DATA_DIR}:/media
-    restart: unless-stopped
-
   prowlarr:
     image: ghcr.io/hotio/prowlarr:nightly
     container_name: prowlarr
@@ -161,9 +143,12 @@ services:
       - VPN_PROVIDER=generic
       - VPN_LAN_NETWORK=192.168.20.0/24
       - VPN_CONF=wg0
+      - VPN_FIREWALL_TYPE=auto
+      - VPN_NAMESERVERS=wg
       - VPN_IP_CHECK_DELAY=5
       - VPN_IP_CHECK_EXIT=true
       - PRIVOXY_ENABLED=false
+      - UNBOUND_ENABLED=false
     volumes:
       - ${CONFIG_DIR}/qbittorrent:/config
       - ${DATA_DIR}/torrents:/media/torrents
@@ -172,6 +157,37 @@ services:
       - NET_ADMIN
     sysctls:
       - net.ipv4.conf.all.src_valid_mark=1
+      - net.ipv6.conf.all.disable_ipv6=1
+    restart: unless-stopped
+
+  qbitmanage:
+    image: ghcr.io/hotio/qbitmanage
+    container_name: qbitmanage
+    networks:
+      - mediacenter
+    environment:
+      - PUID=13007
+      - PGID=13000
+      - UMASK=002
+      - TZ=${TIMEZONE}
+    volumes:
+      - ${CONFIG_DIR}/qbitmanage:/config
+      - ${DATA_DIR}/torrents:/media/torrents
+      - /home/jnbolsen/docker-config/qbittorrent/data/BT_backup:/torrentdir
+    restart: unless-stopped
+
+  cross-seed:
+    image: ghcr.io/cross-seed/cross-seed:6
+    container_name: cross-seed
+    networks:
+      - mediacenter
+    user: 13007:13000
+    ports:
+      - 2468:2468
+    volumes:
+      - ${CONFIG_DIR}/cross-seed:/config
+      - ${DATA_DIR}/torrents:/media/torrents
+    command: daemon
     restart: unless-stopped
 
   sabnzbd:
@@ -188,6 +204,7 @@ services:
       - TZ=${TIMEZONE}
     volumes:
       - ${CONFIG_DIR}/sabnzbd:/config
+      - ${DATA_DIR}/usenet:/media/usenet
       - ${DOWNLOAD_DIR}/usenet:/download/usenet
     restart: unless-stopped
 
