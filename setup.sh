@@ -4,7 +4,7 @@
 sudo useradd radarr -u 13011
 sudo useradd sonarr -u 13002
 sudo useradd lidarr -u 13003
-sudo useradd readarr -u 13004
+sudo useradd tautulli -u 13004
 sudo useradd prowlarr -u 13005
 sudo useradd bazarr -u 13006
 sudo useradd qbittorrent -u 13007
@@ -23,7 +23,7 @@ sudo chown -R $USER:mediacenter /home/$USER/docker-config
 sudo usermod -aG mediacenter radarr
 sudo usermod -aG mediacenter sonarr
 sudo usermod -aG mediacenter lidarr
-sudo usermod -aG mediacenter readarr
+sudo usermod -aG mediacenter tautulli
 sudo usermod -aG mediacenter prowlarr
 sudo usermod -aG mediacenter bazarr
 sudo usermod -aG mediacenter qbittorrent
