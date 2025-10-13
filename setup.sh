@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Make users and group
+# DO NOT USE 13001. That is used for immich on another server.
 sudo useradd radarr -u 13011
 sudo useradd sonarr -u 13002
 sudo useradd lidarr -u 13003
