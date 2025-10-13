@@ -2,6 +2,7 @@
 
 # Make users and group
 # DO NOT USE 13001. That is used for immich on another server.
+sudo useradd media -u 13000
 sudo useradd radarr -u 13011
 sudo useradd sonarr -u 13002
 sudo useradd lidarr -u 13003
@@ -21,6 +22,7 @@ sudo mkdir -pv /home/$USER/docker-config
 # Set permissions
 sudo chmod -R 775 /home/$USER/docker-config
 sudo chown -R $USER:mediacenter /home/$USER/docker-config
+sudo usermod -aG mediacenter media
 sudo usermod -aG mediacenter radarr
 sudo usermod -aG mediacenter sonarr
 sudo usermod -aG mediacenter lidarr
