@@ -33,7 +33,7 @@ Required packages are installed:
 
 The following is set up:
   - NFS share mounts, as required (in my case, media and download shares).
-  - Make docker depend on NFS share mounts (qbittorren tmay prevent shutdown if not).
+  - Make docker depend on NFS share mounts (qbittorrent may prevent shutdown if not).
 
 ## Using
 1. To get started, clone the repository in a directory of your choosing.  Usually the user home directory.
