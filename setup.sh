@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Make users and group
-# DO NOT USE 13001. That is used for immich on another server.
-sudo useradd media -u 13000
+# DO NOT USE 13008. That is used for immich on another server.
+sudo useradd media -u 13001
 sudo useradd radarr -u 13011
 sudo useradd sonarr -u 13002
 sudo useradd lidarr -u 13003
