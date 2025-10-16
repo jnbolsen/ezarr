@@ -23,7 +23,7 @@ Ezarr is a project built to make it easy (EZ) to deploy a servarr mediacenter on
 This does not include a media player (Plex, Jellyfin, etc) since it is on a different server in my case. 
 
 ## Prerequisites
-The following packages are installed:
+Required packages are installed:
   - qemu-agent (for proxmox).
   - curl.
 
