@@ -1,42 +1,11 @@
+name: ezarr
+
 services:
-# MEDIA SERVER
-#  plex:
-#    image: ghcr.io/hotio/plex
-#    container_name: plex
-#    network_mode: host
-#    deploy:
-#      resources:
-#        reservations:
-#          devices:
-#            - capabilities: [gpu]
-#    environment:
-#      - PUID=${UID}
-#      - PGID=13000
-#      - UMASK=002
-#      - TZ=${TIMEZONE}
-#      - PLEX_CLAIM_TOKEN=${PLEX_CLAIM}
-#      - PLEX_ADVERTISE_URL
-#      - PLEX_NO_AUTH_NETWORKS
-#      - PLEX_BETA_INSTALL=false
-#      - PLEX_PURGE_CODECS=true
-#      - NVIDIA_VISIBLE_DEVICES=all
-#      - NVIDIA_DRIVER_CAPABILITIES=compute,video,utility
-#    volumes:
-#      - ${CONFIG_DIR}/plex:/config
-#      - ${DATA_DIR}/files:/files
-#      - /dev/shm:/transcode
-#    restart: unless-stopped
-#
   tautulli:
     image: ghcr.io/hotio/tautulli:testing
     container_name: tautulli
-    networks:
-      - mediacenter
     ports:
       - 8181:8181
-#    network_mode: host
-#    depends_on:
-#      - plex
     environment:
       - PUID=13004
       - PGID=13000
@@ -46,12 +15,9 @@ services:
       - ${CONFIG_DIR}/tautulli:/config
     restart: unless-stopped
 
-# SERVARR
   radarr:
     image: ghcr.io/hotio/radarr:nightly
     container_name: radarr
-    networks:
-      - mediacenter
     ports:
       - 7878:7878
     environment:
@@ -62,13 +28,14 @@ services:
     volumes:
       - ${CONFIG_DIR}/radarr:/config
       - ${DATA_DIR}:/media
+    depends_on:
+      - qbittorrent
+      - prowlarr
     restart: unless-stopped
 
   sonarr:
     image: ghcr.io/hotio/sonarr:nightly
     container_name: sonarr
-    networks:
-      - mediacenter
     ports:
       - 8989:8989
     environment:
@@ -79,13 +46,14 @@ services:
     volumes:
       - ${CONFIG_DIR}/sonarr:/config
       - ${DATA_DIR}:/media
+    depends_on:
+      - qbittorrent
+      - prowlarr
     restart: unless-stopped
 
   lidarr:
     image: ghcr.io/hotio/lidarr:nightly
     container_name: lidarr
-    networks:
-      - mediacenter
     ports:
       - 8686:8686
     environment:
@@ -96,13 +64,14 @@ services:
     volumes:
       - ${CONFIG_DIR}/lidarr:/config
       - ${DATA_DIR}:/media
+    depends_on:
+      - qbittorrent
+      - prowlarr
     restart: unless-stopped
 
   prowlarr:
     image: ghcr.io/hotio/prowlarr:nightly
     container_name: prowlarr
-    networks:
-      - mediacenter
     ports:
       - 9696:9696
     environment:
@@ -117,8 +86,6 @@ services:
   bazarr:
     container_name: bazarr
     image: ghcr.io/hotio/bazarr:nightly
-    networks:
-      - mediacenter
     ports:
       - 6767:6767
     environment:
@@ -134,8 +101,6 @@ services:
   qbittorrent:
     image: ghcr.io/hotio/qbittorrent:latest
     container_name: qbittorrent
-    networks:
-      - mediacenter
     ports:
       - 8080:8080
       - 8118:8118
@@ -168,8 +133,6 @@ services:
   qbitmanage:
     image: ghcr.io/hotio/qbitmanage
     container_name: qbitmanage
-    networks:
-      - mediacenter
     environment:
       - PUID=13007
       - PGID=13000
@@ -179,13 +142,13 @@ services:
       - ${CONFIG_DIR}/qbitmanage:/config
       - ${DATA_DIR}/torrents:/media/torrents
       - /home/jnbolsen/docker-config/qbittorrent/data/BT_backup:/torrentdir
+    depends_on:
+      - qbittorrent
     restart: unless-stopped
 
   cross-seed:
     image: ghcr.io/cross-seed/cross-seed:6
     container_name: cross-seed
-    networks:
-      - mediacenter
     user: 13007:13000
     ports:
       - 2468:2468
@@ -193,30 +156,12 @@ services:
       - ${CONFIG_DIR}/cross-seed:/config
       - ${DATA_DIR}/torrents:/media/torrents
     command: daemon
-    restart: unless-stopped
-
-  sabnzbd:
-    image: ghcr.io/hotio/sabnzbd:latest
-    container_name: sabnzbd
-    networks:
-      - mediacenter
-    ports:
-      - 8081:8080
-    environment:
-      - PUID=13012
-      - PGID=13000
-      - UMASK=002
-      - TZ=${TIMEZONE}
-    volumes:
-      - ${CONFIG_DIR}/sabnzbd:/config
-      - ${DATA_DIR}/usenet:/media/usenet
-      - ${DOWNLOAD_DIR}/usenet:/download/usenet
+    depends_on:
+      - qbittorrent
     restart: unless-stopped
 
   overseerr:
     image: ghcr.io/hotio/overseerr:nightly
-    networks:
-      - mediacenter
     container_name: overseerr
     ports:
       - 5055:5055
@@ -231,8 +176,6 @@ services:
 
   notifiarr:
     image: golift/notifiarr
-    networks:
-      - mediacenter
     container_name: notifiarr
     environment:
       - PUID=13010
@@ -246,7 +189,3 @@ services:
       - /var/run/utmp:/var/run/utmp
       - /etc/machine-id:/etc/machine-id
     restart: unless-stopped
-
-networks:
-  mediacenter:
-    driver: bridge
