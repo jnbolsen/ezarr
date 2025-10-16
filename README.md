@@ -24,27 +24,28 @@ This does not include a media player (Plex, Jellyfin, etc) since it is on a diff
 
 ## Prerequisites
 The following packages are installed:
-  - sudo
   - qemu-agent (for proxmox).
   - curl.
 
-`$ apt install cifs-utils sudo qemu-guest-agent curl`
+`apt install qemu-guest-agent curl`
+
+The following is set up:
+  - NFS share mounts, as required (in my case, media and download shares).
+  - Make docker depend on NFS share mounts (qbittorren tmay prevent shutdown if not).
 
 ## Using
 1. To get started, clone the repository in a directory of your choosing.  Usually the user home directory.
-2. Copy `.env.sample` to a real `.env` by running `$ cp .env.sample .env`.
+2. Copy `.env.sample` to a real `.env` by running `cp .env.sample .env`.
 3. Set the environment variables to your liking. Note that `ROOT_DIR` should be the directory you
    have cloned this in.
 4. Run `setup.sh` as superuser. This will set up your users, a system of directories, ensure
    permissions are set correctly.
 5. Run `docker compose up -d`.
 
-That's it! Your containers are now running and you can continue to set up the settings in them. Take
-note of the following:
+That's it! Your containers are now running and you can continue to set up the settings in them.
+
+## Post Installation Notes
 - When linking one service to another, remember to use the container name instead of `localhost`.
 - Use [TRaSH Guides](https://trash-guides.info/) for help in optimizing the -arr suite, plex, and qbittorrent.
-- In qBittorrent, after connecting it to the -arr services, you can indicate it should move
-  torrents in certain categories to certain directories, like torrents in the `radarr` category
-  to `/data/torrents/movies`. You should do this.
 - You'll have to add indexers in Prowlarr by hand. Use Prowlarrs settings to connect it to the
   other -arr apps.
