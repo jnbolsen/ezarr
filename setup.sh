@@ -15,7 +15,6 @@ sudo useradd overseerr -u 13009
 sudo useradd notifiarr -u 13010
 sudo groupadd mediacenter -g 13000
 
-
 # Make directories
 sudo mkdir -pv /home/$USER/docker-config
 
