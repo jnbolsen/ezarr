@@ -33,5 +33,3 @@ sudo usermod -aG mediacenter sabnzbd
 sudo usermod -aG mediacenter overseerr
 sudo usermod -aG mediacenter notifiarr
 sudo usermod -aG mediacenter $USER
-
-echo "UID=$(id -u)" >> .env
