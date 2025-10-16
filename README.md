@@ -15,6 +15,8 @@ Ezarr is a project built to make it easy (EZ) to deploy a servarr mediacenter on
   keep track of Torrent or UseNet links.
 - [qBittorrent](https://www.qbittorrent.org/) - Torrent downloader. Also provides a bunch more
   features for management.
+- [Qbitmanage](https://github.com/StuffAnThings/qbit_manage) - Qbittorrent manager.
+- [Cross-Seed](https://github.com/cross-seed/cross-seed) - Cross-seed manager for Qbittorrent and other torrent downloaders.
 - [Overseerr](https://overseerr.dev/) - Request manager for the arr suite.
 - [Notifiarr](https://notifiarr.com/guest/login) - Client that connects to TRaSH Guides for automatic radarr and sonarr profile and quality updates (can do many other things too).
 - [Tautulli](https://tautulli.com/) - Monitoring application for PleX which can keep track of
