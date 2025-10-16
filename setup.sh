@@ -20,7 +20,7 @@ sudo mkdir -pv /home/$USER/docker-config
 
 # Set permissions
 sudo chmod -R 775 /home/$USER/docker-config
-sudo chown -R $USER:mediacenter /home/$USER/docker-config
+sudo chown -R media:mediacenter /home/$USER/docker-config
 sudo usermod -aG mediacenter media
 sudo usermod -aG mediacenter radarr
 sudo usermod -aG mediacenter sonarr
