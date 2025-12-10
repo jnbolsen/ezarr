@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Set up your .env file BEFORE running this script!!!
-# Export all variables from .env
+
+# Export all variables from environment variable file .env
 set -a
 source .env
 set +a
@@ -22,12 +23,11 @@ sudo useradd slskd -u 13008
 sudo useradd overseerr -u 13009
 sudo useradd notifiarr -u 13010
 
-# Make directories
+# Make config directory
+# NFS data directories should be set up manually.
 sudo mkdir -pv ${CONFIG_DIR}
 
-# Set permissions
-sudo chmod -R 775 ${CONFIG_DIR}
-sudo chown -R media:mediacenter ${CONFIG_DIR}
+# Add users to mediacenter group
 sudo usermod -aG mediacenter radarr
 sudo usermod -aG mediacenter sonarr
 sudo usermod -aG mediacenter lidarr
@@ -39,3 +39,24 @@ sudo usermod -aG mediacenter slskd
 sudo usermod -aG mediacenter overseerr
 sudo usermod -aG mediacenter notifiarr
 sudo usermod -aG mediacenter $USER
+
+# Make directories
+sudo mkdir -pv ${CONFIG_DIR}/config/{sonarr,radarr,lidarr,readarr,mylar,prowlarr,qbittorrent,jackett,audiobookshelf,overseerr,plex,jellyfin,tautulli,sabnzbd,jellyseerr,bazarr}-config
+
+# Set permissions
+sudo chmod -R 775 ${CONFIG_DIR}
+sudo chown -R media:mediacenter ${CONFIG_DIR}
+sudo chown -R radarr:mediacenter ${CONFIG_DIR}/radarr
+sudo chown -R sonarr:mediacenter ${CONFIG_DIR}/sonarr
+sudo chown -R lidarr:mediacenter ${CONFIG_DIR}/lidarr
+sudo chown -R tautulli:mediacenter ${CONFIG_DIR}/tautulli
+sudo chown -R prowlarr:mediacenter ${CONFIG_DIR}/prowlarr
+sudo chown -R bazarr:mediacenter ${CONFIG_DIR}/bazarr
+sudo chown -R qbittorrent:mediacenter ${CONFIG_DIR}/qbittorrent
+sudo chown -R qbittorrent:mediacenter ${CONFIG_DIR}/qbitmanage
+sudo chown -R qbittorrent:mediacenter ${CONFIG_DIR}/cross-seed
+sudo chown -R slskd:mediacenter ${CONFIG_DIR}/slskd
+sudo chown -R overseerr:mediacenter ${CONFIG_DIR}/overseerr
+sudo chown -R notifiarr:mediacenter ${CONFIG_DIR}/notifiarr
+
+echo "Done! It is recommended to reboot now."
