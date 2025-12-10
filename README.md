@@ -39,8 +39,7 @@ The following is set up:
 ## Installing
 1. Clone the repository in a directory of your choosing.  Usually the user home directory.
 2. Copy the environment variable file `.env.sample` to a real `.env` by running `cp .env.sample .env`.
-3. Set the environment variables to your liking. Note that `ROOT_DIR` should be the directory you
-   have cloned this in.
+3. Set the environment variables to your liking.
 4. Run `setup.sh` as superuser. This will set up your users, a system of directories, and ensure
    permissions are set correctly.
 5. Run `docker compose up -d`.
