@@ -3,7 +3,7 @@
 
 This is a fork from [Luctia/ezarr](https://github.com/Luctia/ezarr), tailored for my personal use.
 
-Ezarr is a project built to make it easy (EZ) to deploy a servarr mediacenter on an Ubuntu server with the proper permissions and setup as listed in this [Docker Guide](https://wiki.servarr.com/docker-guide). It features:
+Ezarr is a project built to make it EZ to deploy a servarr mediacenter on an Ubuntu server with the proper permissions and setup as listed in this [Docker Guide](https://wiki.servarr.com/docker-guide). It features:
 - [Sonarr](https://sonarr.tv/) - An application to manage TV shows. It is capable of keeping track
   of what you'd like to watch, at what quality, in which language and more. Used in conjunction with
   applications like qBittorrent and Prowlarr (see below), it provides easy searchign and colleciton
@@ -24,8 +24,10 @@ Ezarr is a project built to make it easy (EZ) to deploy a servarr mediacenter on
 
 This does not include a media player (Plex, Jellyfin, etc) since it is on a different server in my case. 
 
-## Prerequisites
-Packages are installed:
+## Requirements
+[Docker](https://docs.docker.com/engine/install/) is installed.
+
+The following packages are installed:
   - nfs-common (nfs client)
   - qemu-agent (for proxmox)
   - curl
@@ -36,9 +38,9 @@ The following is set up:
   - NFS share mounts with correct ownership ($USER:mediacenter) and permissions, as required (in my case, media and download shares).
   - Make docker depend on NFS share mounts (qbittorrent may prevent shutdown if not).
 
-## Installing
-1. Clone the repository in a directory of your choosing.  Usually the user home directory.
-2. Copy the environment variable file `.env.sample` to a real `.env` by running `cp .env.sample .env`.
+## Using
+1. Clone the repository in a directory of your choosing, usually the user home directory, `git clone https://github.com/jnbolsen/ezarr.git`.
+2. Copy the sample file `.env.sample` to an environment variable file `.env` by running `cp .env.sample .env`.
 3. Set the environment variables to your liking.
 4. Run `setup.sh` as superuser. This will set up your users, a system of directories, and ensure
    permissions are set correctly.
