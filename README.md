@@ -39,14 +39,14 @@ The following is set up:
   - Make docker depend on NFS share mounts (qbittorrent may prevent shutdown if not).
 
 ## Using
-1. Clone the repository in a directory of your choosing, usually the user home directory, `git clone https://github.com/jnbolsen/ezarr.git`.
-2. Copy the sample file `.env.sample` to an environment variable file `.env` by running `cp .env.sample .env`.
+1. Clone the repository in a directory of your choosing, usually the user home directory - `git clone https://github.com/jnbolsen/ezarr.git`.
+2. Copy the sample file `.env.sample` to an environment variable file `.env` - `cp .env.sample .env`.
 3. Set the environment variables to your liking.
-4. Run `setup.sh` as superuser. This will set up your users, a system of directories, and ensure
+4. Run the setup script as a superuser - `sudo ./setup.sh`. This will set up your users, a system of directories, and ensure
    permissions are set correctly.
-5. Copy the sample file `docker-compose.yml.sample` to a docker compose file `docker-compose.yml` by running `cp docker-compose.yml.sample docker-compose.yml`.
+5. Copy the sample file `docker-compose.yml.sample` to a docker compose file `docker-compose.yml` - `cp docker-compose.yml.sample docker-compose.yml`.
 6. Edit the docker compose file `docker-compose.yml` and comment out any services you would like to ignore by placing # in front of the lines.
-7. Run `docker compose up -d`.
+7. Start containers - `sudo docker compose up -d`.
 
 That's it! Your containers are now running and you can continue to set up the settings in them.
 
