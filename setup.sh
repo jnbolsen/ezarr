@@ -23,11 +23,11 @@ sudo useradd overseerr -u 13009
 sudo useradd notifiarr -u 13010
 
 # Make directories
-sudo mkdir -pv ./volumes
+sudo mkdir -pv ${CONFIG_DIR}
 
 # Set permissions
-sudo chmod -R 775 ./volumes
-sudo chown -R media:mediacenter ./volumes
+sudo chmod -R 775 ${CONFIG_DIR}
+sudo chown -R media:mediacenter ${CONFIG_DIR}
 sudo usermod -aG mediacenter radarr
 sudo usermod -aG mediacenter sonarr
 sudo usermod -aG mediacenter lidarr
