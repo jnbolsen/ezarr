@@ -8,7 +8,8 @@ set +a
 
 # Make users and groups
 # DO NOT USE 13001. That is used for immich on another server.
-sudo useradd media -g mediacenter
+# User media is mapped to my NAS.
+sudo useradd media -u 13000 -g mediacenter
 sudo groupadd mediacenter -g 13000
 sudo useradd radarr -u 13011
 sudo useradd sonarr -u 13002
