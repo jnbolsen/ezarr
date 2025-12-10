@@ -27,8 +27,8 @@ This does not include a media player (Plex, Jellyfin, etc) since it is on a diff
 ## Prerequisites
 Required packages are installed:
   - nfs-common (nfs client)
-  - qemu-agent (for proxmox).
-  - curl.
+  - qemu-agent (for proxmox)
+  - curl
 
 `sudo apt install nfs-common qemu-guest-agent curl`
 
