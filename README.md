@@ -44,7 +44,9 @@ The following is set up:
 3. Set the environment variables to your liking.
 4. Run `setup.sh` as superuser. This will set up your users, a system of directories, and ensure
    permissions are set correctly.
-5. Run `docker compose up -d`.
+5. Copy the sample file `docker-compose.yml.sample` to a docker compose file `docker-compose.yml` by running `cp docker-compose.yml.sample docker-compose.yml`.
+6. Edit the docker compose file `docker-compose.yml` and comment out any services you would like to ignore by placing # in front of the lines.
+7. Run `docker compose up -d`.
 
 That's it! Your containers are now running and you can continue to set up the settings in them.
 
