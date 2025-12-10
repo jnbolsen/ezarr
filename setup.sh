@@ -1,7 +1,14 @@
 #!/bin/bash
 
-# Make users and group
+# Set up your .env file BEFORE running this script!!!
+# Export all variables from .env
+set -a
+source .env
+set +a
+
+# Make users and groups
 # DO NOT USE 13001. That is used for immich on another server.
+sudo useradd media -g mediacenter
 sudo groupadd mediacenter -g 13000
 sudo useradd radarr -u 13011
 sudo useradd sonarr -u 13002
@@ -19,7 +26,7 @@ sudo mkdir -pv ./volumes
 
 # Set permissions
 sudo chmod -R 775 ./volumes
-sudo chown -R $USER:mediacenter ./volumes
+sudo chown -R media:mediacenter ./volumes
 sudo usermod -aG mediacenter radarr
 sudo usermod -aG mediacenter sonarr
 sudo usermod -aG mediacenter lidarr
