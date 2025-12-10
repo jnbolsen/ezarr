@@ -25,7 +25,7 @@ Ezarr is a project built to make it easy (EZ) to deploy a servarr mediacenter on
 This does not include a media player (Plex, Jellyfin, etc) since it is on a different server in my case. 
 
 ## Prerequisites
-Required packages are installed:
+Packages are installed:
   - nfs-common (nfs client)
   - qemu-agent (for proxmox)
   - curl
@@ -33,22 +33,22 @@ Required packages are installed:
 `sudo apt install nfs-common qemu-guest-agent curl`
 
 The following is set up:
-  - NFS share mounts, as required (in my case, media and download shares).
+  - NFS share mounts with correct permissions (owner: media, group: mediacenter), as required (in my case, media and download shares).
   - Make docker depend on NFS share mounts (qbittorrent may prevent shutdown if not).
 
-## Using
-1. To get started, clone the repository in a directory of your choosing.  Usually the user home directory.
-2. Copy `.env.sample` to a real `.env` by running `cp .env.sample .env`.
+## Installing
+1. Clone the repository in a directory of your choosing.  Usually the user home directory.
+2. Copy the environment variable file `.env.sample` to a real `.env` by running `cp .env.sample .env`.
 3. Set the environment variables to your liking. Note that `ROOT_DIR` should be the directory you
    have cloned this in.
-4. Run `setup.sh` as superuser. This will set up your users, a system of directories, ensure
+4. Run `setup.sh` as superuser. This will set up your users, a system of directories, and ensure
    permissions are set correctly.
 5. Run `docker compose up -d`.
 
 That's it! Your containers are now running and you can continue to set up the settings in them.
 
 ## Post Installation Notes
-- When linking one service to another, remember to use the container name instead of `localhost`.
+- When linking one service to another, you may use the container name instead of `localhost`.
 - Use [TRaSH Guides](https://trash-guides.info/) for help in optimizing the -arr suite, plex, and qbittorrent.
 - You'll have to add indexers in Prowlarr by hand. Use Prowlarrs settings to connect it to the
   other -arr apps.
