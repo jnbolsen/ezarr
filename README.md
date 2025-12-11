@@ -3,7 +3,7 @@
 
 This is a fork from [Luctia/ezarr](https://github.com/Luctia/ezarr), tailored for my personal use.
 
-Ezarr is a project built to make it EZ to deploy a servarr mediacenter on an Ubuntu server with the proper permissions and setup as listed in this [Docker Guide](https://wiki.servarr.com/docker-guide). It features:
+Ezarr is a project built to make it EZ to deploy a media stack on an Ubuntu server with the proper permissions and setup as listed in this [Docker Guide](https://wiki.servarr.com/docker-guide). It features:
 - [Sonarr](https://sonarr.tv/) - An application to manage TV shows. It is capable of keeping track
   of what you'd like to watch, at what quality, in which language and more. Used in conjunction with
   applications like qBittorrent and Prowlarr (see below), it provides easy searchign and colleciton
@@ -49,15 +49,15 @@ Move to the direcotry you created.
 
 Download `docker-compose.yml` and `example.env`
 
-`wget -O docker-compose.yml https://github.com/jnbolsen/ezarr/blob/main/docker-compose.yml`.
+`wget -O docker-compose.yml https://github.com/jnbolsen/ezarr/blob/main/docker-compose.yml`
 
-`wget -O docker-compose.yml https://github.com/jnbolsen/ezarr/blob/main/docker-compose.yml`.
+`wget -O .env https://github.com/jnbolsen/ezarr/blob/main/example.env`
 
 Populate the environment variables to your liking.
-- Set your timezone with `TIMEZONE`.
-- Set your docker configuration directory with `CONFIG_DIR`.
-- Set your media data directory with `DATA_DIR`.
-- Set your media download directory with `DOWNLOAD_DIR`.
+- Set your [timezone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) with `TIMEZONE`.
+- Set your docker configuration directory location with `CONFIG_DIR`.
+- Set your media data directory location with `DATA_DIR`.
+- Set your media download directory location with `DOWNLOAD_DIR`.
 
 Run the setup script as a superuser. This will set up your users, a system of directories, and ensure permissions are set correctly.
 
@@ -65,7 +65,7 @@ Run the setup script as a superuser. This will set up your users, a system of di
 
 Comment out any services in the docker compose file you would like to ignore by placing # in front of the lines.
 
-From the directory you created in Step 1 (which should now contain your customized docker-compose.yml and .env files), run the following command to start Immich as a background service:
+From the directory you created (which should now contain your customized `docker-compose.yml` and `.env` files), run the following command to start your media stack as a background service:
 
 `sudo docker compose up -d`
 
