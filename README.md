@@ -27,9 +27,8 @@ This stack does not include a media player (Plex, Jellyfin, etc) since it is on 
 The following packages are installed:
 - nfs-common (nfs client)
 - qemu-agent (for proxmox)
-- curl
 
-`sudo apt install nfs-common qemu-guest-agent curl`
+`sudo apt install nfs-common qemu-guest-agent`
 
 The following is set up:
 - NFS share mounts with correct ownership of top level direcctories (media:mediacenter) and permissions (umask 022), as required (in my case, media and download shares).
