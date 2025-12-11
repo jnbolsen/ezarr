@@ -35,7 +35,7 @@ The following packages are installed:
 `sudo apt install nfs-common qemu-guest-agent curl`
 
 The following is set up:
-  - NFS share mounts with correct ownership ($USER:mediacenter) and permissions, as required (in my case, media and download shares).
+  - NFS share mounts with correct ownership (media:mediacenter) and permissions, as required (in my case, media and download shares).
   - Make docker depend on NFS share mounts (qbittorrent may prevent shutdown if not).
 
 ## Using
