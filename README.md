@@ -19,7 +19,7 @@ This project makese it EZ to deploy a media stack with the [proper permissions a
 - [Tautulli](https://tautulli.com/) - Monitoring application for Plex which can keep track of
   what has been watched, who watched it, when and where they watched it, and how it was watched.
 
-This stack does not include a media player (Plex, Jellyfin, etc) since it is on a different server in my case.
+This stack does not include a media player (Plex, Jellyfin, etc.) since it is on a different server in my case.
 
 ## Requirements
 [Docker](https://docs.docker.com/engine/install/) is installed.
