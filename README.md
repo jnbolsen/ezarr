@@ -1,9 +1,6 @@
 # EZARR
-[![Check running](https://github.com/Luctia/ezarr/actions/workflows/check_running.yml/badge.svg)](https://github.com/Luctia/ezarr/actions/workflows/check_running.yml)
 
-This is a fork from [Luctia/ezarr](https://github.com/Luctia/ezarr), tailored for my personal use.
-
-Ezarr is a project built to make it EZ to deploy a media stack on an Ubuntu server with the proper permissions and setup as listed in this [Docker Guide](https://wiki.servarr.com/docker-guide). It features:
+This project makese it EZ to deploy a media stack with the [proper permissions and setup](https://wiki.servarr.com/docker-guide). It features:
 - [Sonarr](https://sonarr.tv/) - An application to manage TV shows. It is capable of keeping track
   of what you'd like to watch, at what quality, in which language and more. Used in conjunction with
   applications like qBittorrent and Prowlarr (see below), it provides easy searchign and colleciton
@@ -22,23 +19,23 @@ Ezarr is a project built to make it EZ to deploy a media stack on an Ubuntu serv
 - [Tautulli](https://tautulli.com/) - Monitoring application for Plex which can keep track of
   what has been watched, who watched it, when and where they watched it, and how it was watched.
 
-This does not include a media player (Plex, Jellyfin, etc) since it is on a different server in my case. 
+This stack does not include a media player (Plex, Jellyfin, etc) since it is on a different server in my case.
 
 ## Requirements
 [Docker](https://docs.docker.com/engine/install/) is installed.
 
 The following packages are installed:
-  - nfs-common (nfs client)
-  - qemu-agent (for proxmox)
-  - curl
+- nfs-common (nfs client)
+- qemu-agent (for proxmox)
+- curl
 
 `sudo apt install nfs-common qemu-guest-agent curl`
 
 The following is set up:
-  - NFS share mounts with correct ownership of top level direcctories (media:mediacenter) and permissions (umask 022), as required (in my case, media and download shares).
-  - Make docker depend on NFS share mounts (qbittorrent may prevent shutdown if not).
+- NFS share mounts with correct ownership of top level direcctories (media:mediacenter) and permissions (umask 022), as required (in my case, media and download shares).
+- Make docker depend on NFS share mounts (qbittorrent may prevent shutdown if not).
 
-## Using
+## Usage
 Create a directory of your choice (e.g. `~/ezarr`) to hold the `docker-commpose.yml` and `.env` files.
 
 `mkdir ~/ezarr`
@@ -82,3 +79,10 @@ That's it! Your containers are now running and you can continue to set up the se
 - Use [TRaSH Guides](https://trash-guides.info/) for help in optimizing the -arr suite, plex, and qbittorrent.
 - You'll have to add indexers in Prowlarr by hand. Use Prowlarrs settings to connect it to the
   other -arr apps.
+
+## Tested Environments
+Ubuntu 22.04, 24.04, and 25.10
+Debian 12 and 13
+
+## Reference
+This is a fork of [Luctia/ezarr](https://github.com/Luctia/ezarr), tailored for my personal use.
