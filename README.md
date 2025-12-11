@@ -1,4 +1,4 @@
-# EZARR
+# Ezarr
 
 This project makes it EZ to deploy an arr media stack with the [proper permissions and setup](https://wiki.servarr.com/docker-guide). It features:
 - [Sonarr](https://sonarr.tv/) - An application to manage TV shows. It is capable of keeping track
