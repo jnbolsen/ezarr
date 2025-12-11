@@ -85,3 +85,6 @@ Debian 12 and 13
 
 ## Reference
 This is a fork of [Luctia/ezarr](https://github.com/Luctia/ezarr), tailored for my personal use.
+
+## License
+[MIT](https://github.com/jnbolsen/ezarr/blob/main/LICENSE.md)
