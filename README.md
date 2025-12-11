@@ -35,7 +35,7 @@ The following packages are installed:
 `sudo apt install nfs-common qemu-guest-agent curl`
 
 The following is set up:
-  - NFS share mounts with correct ownership (media:mediacenter) and permissions, as required (in my case, media and download shares).
+  - NFS share mounts with correct ownership of top level direcctories (media:mediacenter) and permissions (umask 022), as required (in my case, media and download shares).
   - Make docker depend on NFS share mounts (qbittorrent may prevent shutdown if not).
 
 ## Using
@@ -53,11 +53,17 @@ Download `docker-compose.yml` and `example.env`
 
 `wget -O .env https://github.com/jnbolsen/ezarr/blob/main/example.env`
 
+`wget -O setup.sh https://github.com/jnbolsen/ezarr/blob/main/setup.sh`
+
 Populate the environment variables to your liking.
 - Set your [timezone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) with `TIMEZONE`.
 - Set your docker configuration directory location with `CONFIG_DIR`.
 - Set your media data directory location with `DATA_DIR`.
 - Set your media download directory location with `DOWNLOAD_DIR`.
+
+Make the setup script executable.
+
+`sudo chmod +x setup.sh`
 
 Run the setup script as a superuser. This will set up your users, a system of directories, and ensure permissions are set correctly.
 
