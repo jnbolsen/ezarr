@@ -39,14 +39,29 @@ The following is set up:
   - Make docker depend on NFS share mounts (qbittorrent may prevent shutdown if not).
 
 ## Using
-1. Clone the repository in a directory of your choosing, usually the user home directory - `git clone https://github.com/jnbolsen/ezarr.git`.
-2. Copy the sample file `.env.sample` to an environment variable file `.env` - `cp .env.sample .env`.
-3. Set the environment variables to your liking.
-4. Run the setup script as a superuser - `sudo ./setup.sh`. This will set up your users, a system of directories, and ensure
-   permissions are set correctly.
-5. Copy the sample file `docker-compose.yml.sample` to a docker compose file `docker-compose.yml` - `cp docker-compose.yml.sample docker-compose.yml`.
-6. Edit the docker compose file `docker-compose.yml` and comment out any services you would like to ignore by placing # in front of the lines.
-7. Start containers - `sudo docker compose up -d`.
+Create a directory of your choice (e.g. `~/ezarr`) to hold the `docker-commpose.yml` and `.env` files.
+`mkdir ~/ezarr`
+
+Move to the direcotry you created.
+`cd ~/ezarr`
+
+Download `docker-compose.yml` and `example.env`
+`wget -O docker-compose.yml https://github.com/jnbolsen/ezarr/blob/main/docker-compose.yml`.
+`wget -O docker-compose.yml https://github.com/jnbolsen/ezarr/blob/main/docker-compose.yml`.
+
+Populate the environment variables to your liking.
+- Set your timezone with `TIMEZONE`.
+- Set your docker configuration directory with `CONFIG_DIR`.
+- Set your media data directory with `DATA_DIR`.
+- Set your media download directory with `DOWNLOAD_DIR`.
+
+Run the setup script as a superuser. This will set up your users, a system of directories, and ensure permissions are set correctly.
+`sudo ./setup.sh`
+
+Comment out any services in the docker compose file you would like to ignore by placing # in front of the lines.
+
+From the directory you created in Step 1 (which should now contain your customized docker-compose.yml and .env files), run the following command to start Immich as a background service:
+`sudo docker compose up -d`
 
 That's it! Your containers are now running and you can continue to set up the settings in them.
 
