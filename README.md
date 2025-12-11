@@ -1,6 +1,6 @@
 # EZARR
 
-This project makese it EZ to deploy a media stack with the [proper permissions and setup](https://wiki.servarr.com/docker-guide). It features:
+This project makes it EZ to deploy an arr media stack with the [proper permissions and setup](https://wiki.servarr.com/docker-guide). It features:
 - [Sonarr](https://sonarr.tv/) - An application to manage TV shows. It is capable of keeping track
   of what you'd like to watch, at what quality, in which language and more. Used in conjunction with
   applications like qBittorrent and Prowlarr (see below), it provides easy searchign and colleciton
@@ -67,7 +67,7 @@ Run the setup script as a superuser. This will set up your users, a system of di
 
 Comment out any services in the docker compose file you would like to ignore by placing # in front of the lines.
 
-From the directory you created (which should now contain your customized `docker-compose.yml` and `.env` files), run the following command to start your media stack as a background service:
+From the directory you created (which should now contain your customized `docker-compose.yml` and `.env` files), run the following command to start your arr media stack as a background service:
 
 `sudo docker compose up -d`
 
