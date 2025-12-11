@@ -39,11 +39,11 @@ Create a directory of your choice (e.g. `~/ezarr`) to hold the `docker-commpose.
 
 `mkdir ~/ezarr`
 
-Move to the direcotry you created.
+Move to the directory you created.
 
 `cd ~/ezarr`
 
-Download `docker-compose.yml` and `example.env`
+Download `docker-compose.yml`, `example.env`, and `setup.sh`.
 
 `wget -O docker-compose.yml https://github.com/jnbolsen/ezarr/blob/main/docker-compose.yml`
 
