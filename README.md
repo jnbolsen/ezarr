@@ -14,7 +14,7 @@ This project makes it EZ to deploy an arr media stack with the [proper permissio
   features for management.
 - [Qbitmanage](https://github.com/StuffAnThings/qbit_manage) - Qbittorrent manager.
 - [Cross-Seed](https://github.com/cross-seed/cross-seed) - Cross-seed manager for Qbittorrent and other torrent downloaders.
-- [Overseerr](https://overseerr.dev/) - Request manager for the arr suite.
+- [Seerr](https://docs.seerr.dev/) - Request manager for the arr suite. The Overseer and Jellyseerr projects were merged into Seerr.
 - [Notifiarr](https://notifiarr.com/guest/login) - Client that connects to TRaSH Guides for automatic radarr and sonarr profile and quality updates (can do many other things too).
 - [Tautulli](https://tautulli.com/) - Monitoring application for Plex which can keep track of
   what has been watched, who watched it, when and where they watched it, and how it was watched.
