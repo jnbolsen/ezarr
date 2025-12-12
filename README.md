@@ -28,7 +28,9 @@ The following packages are installed:
 - nfs-common (nfs client)
 - qemu-agent (for proxmox)
 
-`sudo apt install nfs-common qemu-guest-agent`
+```bash
+sudo apt install nfs-common qemu-guest-agent
+```
 
 The following is set up:
 - NFS share mounts with correct ownership of top level direcctories (media:mediacenter) and permissions (umask 022), as required (in my case, media and download shares).
@@ -37,19 +39,29 @@ The following is set up:
 ## Usage
 Create a directory of your choice (e.g. `~/ezarr`) to hold the `docker-commpose.yml` and `.env` files.
 
-`mkdir ~/ezarr`
+```bash
+mkdir ~/ezarr
+```
 
 Move to the directory you created.
 
-`cd ~/ezarr`
+```bash
+cd ~/ezarr
+```
 
 Download `docker-compose.yml`, `example.env`, and `setup.sh`.
 
-`wget -O docker-compose.yml https://github.com/jnbolsen/ezarr/blob/main/docker-compose.yml`
+```bash
+wget -O docker-compose.yml https://github.com/jnbolsen/ezarr/blob/main/docker-compose.yml
+```
 
-`wget -O .env https://github.com/jnbolsen/ezarr/blob/main/example.env`
+```bash
+wget -O .env https://github.com/jnbolsen/ezarr/blob/main/example.env
+```
 
-`wget -O setup.sh https://github.com/jnbolsen/ezarr/blob/main/setup.sh`
+```bash
+wget -O setup.sh https://github.com/jnbolsen/ezarr/blob/main/setup.sh
+```
 
 Populate the environment variables to your liking.
 - Set your [timezone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) with `TIMEZONE`.
@@ -59,17 +71,23 @@ Populate the environment variables to your liking.
 
 Make the setup script executable.
 
-`sudo chmod +x setup.sh`
+```bash
+sudo chmod +x setup.sh
+```
 
 Run the setup script as a superuser. This will set up your users, a system of directories, and ensure permissions are set correctly.
 
-`sudo ./setup.sh`
+```bash
+sudo ./setup.sh
+```
 
 Comment out any services in the docker compose file you would like to ignore by placing # in front of the lines.
 
 From the directory you created (which should now contain your customized `docker-compose.yml` and `.env` files), run the following command to start your arr media stack as a background service:
 
-`sudo docker compose up -d`
+```bash
+sudo docker compose up -d
+```
 
 That's it! Your containers are now running and you can continue to set up the settings in them.
 
