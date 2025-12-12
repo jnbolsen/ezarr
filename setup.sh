@@ -20,7 +20,7 @@ sudo useradd prowlarr -u 13005
 sudo useradd bazarr -u 13006
 sudo useradd qbittorrent -u 13007
 sudo useradd slskd -u 13008
-sudo useradd overseerr -u 13009
+sudo useradd seerr -u 13009
 sudo useradd notifiarr -u 13010
 
 # Make config directory
@@ -36,7 +36,7 @@ sudo usermod -aG mediacenter prowlarr
 sudo usermod -aG mediacenter bazarr
 sudo usermod -aG mediacenter qbittorrent
 sudo usermod -aG mediacenter slskd
-sudo usermod -aG mediacenter overseerr
+sudo usermod -aG mediacenter seerr
 sudo usermod -aG mediacenter notifiarr
 sudo usermod -aG mediacenter $USER
 
@@ -55,7 +55,7 @@ sudo chown -R qbittorrent:mediacenter ${CONFIG_DIR}/qbittorrent
 sudo chown -R qbittorrent:mediacenter ${CONFIG_DIR}/qbitmanage
 sudo chown -R qbittorrent:mediacenter ${CONFIG_DIR}/cross-seed
 sudo chown -R slskd:mediacenter ${CONFIG_DIR}/slskd
-sudo chown -R overseerr:mediacenter ${CONFIG_DIR}/overseerr
+sudo chown -R overseerr:mediacenter ${CONFIG_DIR}/seerr
 sudo chown -R notifiarr:mediacenter ${CONFIG_DIR}/notifiarr
 
 echo "Done! It is recommended to reboot now."
