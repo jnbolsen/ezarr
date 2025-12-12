@@ -41,7 +41,7 @@ sudo usermod -aG mediacenter notifiarr
 sudo usermod -aG mediacenter $USER
 
 # Make directories
-sudo mkdir -pv ${CONFIG_DIR}/{radarr,sonarr,lidarr,tautulli,prowlarr,bazarr,qbittorrent,qbitmanage,cross-seed,slskd,overseerr,notifiarr}
+sudo mkdir -pv ${CONFIG_DIR}/{radarr,sonarr,lidarr,tautulli,prowlarr,bazarr,qbittorrent,qbitmanage,cross-seed,slskd,seerr,notifiarr}
 # Set permissions
 sudo chmod -R 775 ${CONFIG_DIR}
 sudo chown -R media:mediacenter ${CONFIG_DIR}
