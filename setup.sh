@@ -11,17 +11,17 @@ set +a
 # DO NOT USE 13001. That is used for immich on another server.
 # User media is mapped to my NAS.
 sudo groupadd mediacenter -g 13000
-sudo useradd media -u 13000 -g mediacenter
-sudo useradd radarr -u 13011
-sudo useradd sonarr -u 13002
-sudo useradd lidarr -u 13003
-sudo useradd tautulli -u 13004
-sudo useradd prowlarr -u 13005
-sudo useradd bazarr -u 13006
-sudo useradd qbittorrent -u 13007
-sudo useradd slskd -u 13008
-sudo useradd seerr -u 13009
-sudo useradd notifiarr -u 13010
+sudo useradd media -M -u 13000 -g mediacenter
+sudo useradd radarr -M -u 13011
+sudo useradd sonarr -M -u 13002
+sudo useradd lidarr -M -u 13003
+sudo useradd tautulli -M -u 13004
+sudo useradd prowlarr -M -u 13005
+sudo useradd bazarr -M -u 13006
+sudo useradd qbittorrent -M -u 13007
+sudo useradd slskd -M -u 13008
+sudo useradd seerr -M -u 13009
+sudo useradd notifiarr -M -u 13010
 
 # Make config directory
 # NFS data directories should be set up manually.
