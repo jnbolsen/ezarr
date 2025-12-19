@@ -91,13 +91,13 @@ sudo docker compose up -d
 
 That's it! Your containers are now running and you can continue to set up the settings in them.
 
-## Post Installation Notes
+## Post installation notes
 - When linking one service to another, you may use the container name instead of `localhost`.
 - Use [TRaSH Guides](https://trash-guides.info/) for help in optimizing the -arr suite, plex, and qbittorrent.
 - You'll have to add indexers in Prowlarr by hand. Use Prowlarrs settings to connect it to the
   other -arr apps.
 
-## Tested Environments
+## Tested environments
 Ubuntu 22.04, 24.04, and 25.10 <br />
 Debian 12 and 13
 
