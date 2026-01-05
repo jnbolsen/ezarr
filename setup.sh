@@ -10,8 +10,7 @@ set +a
 # Make users and groups
 # DO NOT USE 13001. That is used for immich on another server.
 # User media is mapped to my NAS.
-sudo groupadd mediacenter -g 13000
-sudo useradd media -M -u 13000 -g mediacenter
+sudo useradd mediacenter -M -u 13000
 sudo useradd radarr -M -u 13011
 sudo useradd sonarr -M -u 13002
 sudo useradd lidarr -M -u 13003
@@ -38,14 +37,13 @@ sudo usermod -aG mediacenter qbittorrent
 sudo usermod -aG mediacenter slskd
 sudo usermod -aG mediacenter seerr
 sudo usermod -aG mediacenter notifiarr
-sudo usermod -aG mediacenter $USER
 
 # Make directories
 sudo mkdir -pv ${CONFIG_DIR}/{radarr,sonarr,lidarr,tautulli,prowlarr,bazarr,qbittorrent,qbitmanage,cross-seed,slskd,seerr,notifiarr}
 
 # Set permissions
 sudo chmod -R 775 ${CONFIG_DIR}
-sudo chown -R media:mediacenter ${CONFIG_DIR}
+sudo chown -R mediacenter:mediacenter ${CONFIG_DIR}
 sudo chown -R radarr:mediacenter ${CONFIG_DIR}/radarr
 sudo chown -R sonarr:mediacenter ${CONFIG_DIR}/sonarr
 sudo chown -R lidarr:mediacenter ${CONFIG_DIR}/lidarr
