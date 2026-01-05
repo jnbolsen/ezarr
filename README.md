@@ -63,16 +63,27 @@ wget -O .env https://github.com/jnbolsen/ezarr/blob/main/example.env
 wget -O setup.sh https://github.com/jnbolsen/ezarr/blob/main/setup.sh
 ```
 
-Populate the environment variables to your liking.
+Edit `example.env` and populate the variables to your liking.
+
+```bash
+nano example.env
+```
+
 - Set your [timezone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) with `TIMEZONE`.
 - Set your docker configuration directory location with `CONFIG_DIR`.
 - Set your media data directory location with `DATA_DIR`.
 - Set your media download directory location with `DOWNLOAD_DIR`. This can be ignored if you do not have a separate download and media directory.
 
+Copy the example environment variables file to a real environment variables file.
+
+```bash
+cp example.env .env
+```
+
 Make the setup script executable.
 
 ```bash
-sudo chmod +x setup.sh
+chmod +x setup.sh
 ```
 
 Run the setup script as a superuser. This will set up your users, a system of directories, and ensure permissions are set correctly.
