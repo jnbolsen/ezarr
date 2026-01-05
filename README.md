@@ -34,7 +34,7 @@ sudo apt install nfs-common qemu-guest-agent
 ```
 
 The following is set up:
-- NFS share mounts with correct ownership of top level direcctories (media:mediacenter) and permissions (umask 022), as required (in my case, media and download shares).
+- NFS share mounts with correct ownership of top level direcctories (mediacenter:mediacenter) and permissions (umask 022), as required (in my case, media and download shares).
 
 ## Usage
 Create a directory of your choice (for example, `~/ezarr`) to hold the `docker-commpose.yml` and `.env` files.
