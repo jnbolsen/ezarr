@@ -1,6 +1,9 @@
 # Ezarr
+This project makes it EZ to deploy an arr media stack with the following permissions as listed in the [docker guide](https://wiki.servarr.com/docker-guide).
+- Each software runs as its own user where they are all part of a shared group (mediacenter) with folder permissions set to 775 (drwxrwxr-x) and files set to 664 (-rw-rw-r--).
+- Docker images that allow the use of umask 002 (mainly hotio images).
 
-This project makes it EZ to deploy an arr media stack with the [proper permissions and setup](https://wiki.servarr.com/docker-guide). It features:
+It features:
 - [Sonarr](https://sonarr.tv/) - An application to manage TV shows. It is capable of keeping track
   of what you'd like to watch, at what quality, in which language and more. Used in conjunction with
   applications like qBittorrent and Prowlarr (see below), it provides easy searchign and colleciton
@@ -23,7 +26,7 @@ This project makes it EZ to deploy an arr media stack with the [proper permissio
 > This stack does not include a media player (Plex, Jellyfin, etc.) since it is on a different server in my case.
 
 ## Requirements
-[Docker is installed](https://docs.docker.com/engine/install/).
+[Docker](https://docs.docker.com/engine/install/) is installed.
 
 The following packages are installed:
 - nfs-common (NFS client)
@@ -34,7 +37,7 @@ sudo apt install nfs-common qemu-guest-agent
 ```
 
 The following is set up:
-- NFS share mounts with correct ownership of top level directories (mediacenter:mediacenter) and permissions (umask 022), as required (in my case, media and download shares).
+- NFS share mounts with correct ownership of top level directories (mediacenter:mediacenter) and permissions (umask 022). Make sure to follow the [docker guide](https://wiki.servarr.com/docker-guide) for setting up folders to allow hard links and instant moves (atomic moves).
 
 ## Usage
 Create a directory of your choice (for example, `~/ezarr`) to hold the `docker-commpose.yml` and `.env` files.
