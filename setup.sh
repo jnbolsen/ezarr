@@ -93,5 +93,4 @@ sudo chown -R notifiarr:mediacenter ${CONFIG_DIR}/notifiarr
 
 print_info "Permissions set..."
 
-
 print_success "Done! It is recommended to reboot now."
