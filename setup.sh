@@ -37,17 +37,17 @@ print_banner() {
 # DO NOT USE 13001. That is used for immich on another server.
 # User mediacenter and group mediacenter is mapped to my NAS with permissions set.
 create_users() {
-  sudo useradd mediacenter -M -u 13000
-  sudo useradd radarr -M -u 13011
-  sudo useradd sonarr -M -u 13002
-  sudo useradd lidarr -M -u 13003
-  sudo useradd tautulli -M -u 13004
-  sudo useradd prowlarr -M -u 13005
-  sudo useradd bazarr -M -u 13006
-  sudo useradd qbittorrent -M -u 13007
-  sudo useradd slskd -M -u 13008
-  sudo useradd seerr -M -u 13009
-  sudo useradd notifiarr -M -u 13010
+  useradd mediacenter -M -u 13000
+  useradd radarr -M -u 13011
+  useradd sonarr -M -u 13002
+  useradd lidarr -M -u 13003
+  useradd tautulli -M -u 13004
+  useradd prowlarr -M -u 13005
+  useradd bazarr -M -u 13006
+  useradd qbittorrent -M -u 13007
+  useradd slskd -M -u 13008
+  useradd seerr -M -u 13009
+  useradd notifiarr -M -u 13010
   
   print_info "Users and mediacenter group created..."
 }
@@ -62,36 +62,36 @@ config_directories() {
 
 # Add users to mediacenter group
 add_users() {
-  sudo usermod -aG mediacenter radarr
-  sudo usermod -aG mediacenter sonarr
-  sudo usermod -aG mediacenter lidarr
-  sudo usermod -aG mediacenter tautulli
-  sudo usermod -aG mediacenter prowlarr
-  sudo usermod -aG mediacenter bazarr
-  sudo usermod -aG mediacenter qbittorrent
-  sudo usermod -aG mediacenter slskd
-  sudo usermod -aG mediacenter seerr
-  sudo usermod -aG mediacenter notifiarr
+  usermod -aG mediacenter radarr
+  usermod -aG mediacenter sonarr
+  usermod -aG mediacenter lidarr
+  usermod -aG mediacenter tautulli
+  usermod -aG mediacenter prowlarr
+  usermod -aG mediacenter bazarr
+  usermod -aG mediacenter qbittorrent
+  usermod -aG mediacenter slskd
+  usermod -aG mediacenter seerr
+  usermod -aG mediacenter notifiarr
   
   print_info "Users added to mediacenter group..."
 }
 
 # Set permissions
 set_permissions() {
-  sudo chmod -R 775 ${CONFIG_DIR}
-  sudo chown -R mediacenter:mediacenter ${CONFIG_DIR}
-  sudo chown -R radarr:mediacenter ${CONFIG_DIR}/radarr
-  sudo chown -R sonarr:mediacenter ${CONFIG_DIR}/sonarr
-  sudo chown -R lidarr:mediacenter ${CONFIG_DIR}/lidarr
-  sudo chown -R tautulli:mediacenter ${CONFIG_DIR}/tautulli
-  sudo chown -R prowlarr:mediacenter ${CONFIG_DIR}/prowlarr
-  sudo chown -R bazarr:mediacenter ${CONFIG_DIR}/bazarr
-  sudo chown -R qbittorrent:mediacenter ${CONFIG_DIR}/qbittorrent
-  sudo chown -R qbittorrent:mediacenter ${CONFIG_DIR}/qbitmanage
-  sudo chown -R qbittorrent:mediacenter ${CONFIG_DIR}/cross-seed
-  sudo chown -R slskd:mediacenter ${CONFIG_DIR}/slskd
-  sudo chown -R overseerr:mediacenter ${CONFIG_DIR}/seerr
-  sudo chown -R notifiarr:mediacenter ${CONFIG_DIR}/notifiarr
+  chmod -R 775 ${CONFIG_DIR}
+  chown -R mediacenter:mediacenter ${CONFIG_DIR}
+  chown -R radarr:radarr ${CONFIG_DIR}/radarr
+  chown -R sonarr:sonarr ${CONFIG_DIR}/sonarr
+  chown -R lidarr:lidarr ${CONFIG_DIR}/lidarr
+  chown -R tautulli:tautulli ${CONFIG_DIR}/tautulli
+  chown -R prowlarr:prowlarr ${CONFIG_DIR}/prowlarr
+  chown -R bazarr:bazarr ${CONFIG_DIR}/bazarr
+  chown -R qbittorrent:qbittorrent ${CONFIG_DIR}/qbittorrent
+  chown -R qbittorrent:qbittorrent ${CONFIG_DIR}/qbitmanage
+  chown -R qbittorrent:qbittorrent ${CONFIG_DIR}/cross-seed
+  chown -R slskd:slskd ${CONFIG_DIR}/slskd
+  chown -R seerr:seerr ${CONFIG_DIR}/seerr
+  chown -R notifiarr:notifiarr ${CONFIG_DIR}/notifiarr
 
   print_info "Permissions set..."
 }
