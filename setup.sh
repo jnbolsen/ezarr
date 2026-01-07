@@ -1,11 +1,6 @@
 #!/bin/bash
 
-# Set up your .env file BEFORE running this script!!!
-
-# Export all variables from environment variable file .env
-set -a
-source .env
-set +a
+set -euo pipefail
 
 # Colors for output
 RED='\033[0;31m'
@@ -49,7 +44,7 @@ create_users() {
   useradd seerr -M -u 13009
   useradd notifiarr -M -u 13010
   
-  print_info "Users and mediacenter group created..."
+  print_info "Users and mediacenter group created."
 }
 
 # Create config directories
@@ -57,7 +52,7 @@ create_users() {
 config_directories() {
   sudo mkdir -pv ${CONFIG_DIR}/{radarr,sonarr,lidarr,tautulli,prowlarr,bazarr,qbittorrent,qbitmanage,cross-seed,slskd,seerr,notifiarr}
   
-  print_info "Configuration directories created..."
+  print_info "Configuration directories created."
 }
 
 # Add users to mediacenter group
@@ -73,27 +68,27 @@ add_users() {
   usermod -aG mediacenter seerr
   usermod -aG mediacenter notifiarr
   
-  print_info "Users added to mediacenter group..."
+  print_info "Users added to mediacenter group."
 }
 
 # Set permissions
 set_permissions() {
   chmod -R 775 ${CONFIG_DIR}
-  chown -R mediacenter:mediacenter ${CONFIG_DIR}
-  chown -R radarr:radarr ${CONFIG_DIR}/radarr
-  chown -R sonarr:sonarr ${CONFIG_DIR}/sonarr
-  chown -R lidarr:lidarr ${CONFIG_DIR}/lidarr
-  chown -R tautulli:tautulli ${CONFIG_DIR}/tautulli
-  chown -R prowlarr:prowlarr ${CONFIG_DIR}/prowlarr
-  chown -R bazarr:bazarr ${CONFIG_DIR}/bazarr
-  chown -R qbittorrent:qbittorrent ${CONFIG_DIR}/qbittorrent
-  chown -R qbittorrent:qbittorrent ${CONFIG_DIR}/qbitmanage
-  chown -R qbittorrent:qbittorrent ${CONFIG_DIR}/cross-seed
-  chown -R slskd:slskd ${CONFIG_DIR}/slskd
-  chown -R seerr:seerr ${CONFIG_DIR}/seerr
-  chown -R notifiarr:notifiarr ${CONFIG_DIR}/notifiarr
+  chown mediacenter:mediacenter ${CONFIG_DIR}
+  chown radarr:radarr ${CONFIG_DIR}/radarr
+  chown sonarr:sonarr ${CONFIG_DIR}/sonarr
+  chown lidarr:lidarr ${CONFIG_DIR}/lidarr
+  chown tautulli:tautulli ${CONFIG_DIR}/tautulli
+  chown prowlarr:prowlarr ${CONFIG_DIR}/prowlarr
+  chown bazarr:bazarr ${CONFIG_DIR}/bazarr
+  chown qbittorrent:qbittorrent ${CONFIG_DIR}/qbittorrent
+  chown qbittorrent:qbittorrent ${CONFIG_DIR}/qbitmanage
+  chown qbittorrent:qbittorrent ${CONFIG_DIR}/cross-seed
+  chown slskd:slskd ${CONFIG_DIR}/slskd
+  chown seerr:seerr ${CONFIG_DIR}/seerr
+  chown notifiarr:notifiarr ${CONFIG_DIR}/notifiarr
 
-  print_info "Permissions set..."
+  print_info "Permissions set."
 }
 
 print_success "Done! It is recommended to reboot now."
