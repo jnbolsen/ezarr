@@ -5,15 +5,17 @@ set -euo pipefail
 # Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-# Print colored output
-print_info() { echo -e "${BLUE}[INFO]${NC} $1"; }
-print_success() { echo -e "${GREEN}[SUCCESS]${NC} $1"; }
-print_warning() { echo -e "${YELLOW}[WARNING]${NC} $1"; }
-print_error() { echo -e "${RED}[ERROR]${NC} $1"; }
+# Logging functions
+msg_info() { echo -e "${NC}INFO:${NC} $1"; }
+msg_ok() { echo -e "${GREEN}SUCCESS:${NC} $1"; }
+msg_error() { echo -e "${RED}ERROR:${NC} $1" >&2; }
+
+# Logging setup
+LOGFILE="/var/log/ezarr.log"
+exec > >(tee -a "$LOGFILE") 2>&1
 
 # Print banner
 print_banner() {
@@ -22,9 +24,9 @@ print_banner() {
   echo "   / __/_  / / _ | / _ \/ _ \ "
   echo "  / _/  / /_/ __ |/ , _/ , _/ "
   echo " /___/ /___/_/ |_/_/|_/_/|_|  "
-  echo -e "${NC}"
-  echo "Easily set up media arr stack"
   echo "=============================="
+  echo -e "${NC}"
+  echo "Setting up media arr stack..."
   echo ""
 }
 
@@ -44,7 +46,7 @@ create_users() {
   useradd seerr -M -u 13009
   useradd notifiarr -M -u 13010
   
-  print_info "Users and mediacenter group created."
+  msg_info "Users and mediacenter group created."
 }
 
 # Create config directories
@@ -52,7 +54,7 @@ create_users() {
 config_directories() {
   sudo mkdir -pv ${CONFIG_DIR}/{radarr,sonarr,lidarr,tautulli,prowlarr,bazarr,qbittorrent,qbitmanage,cross-seed,slskd,seerr,notifiarr}
   
-  print_info "Configuration directories created."
+  msg_info "Configuration directories created."
 }
 
 # Add users to mediacenter group
@@ -68,7 +70,7 @@ add_users() {
   usermod -aG mediacenter seerr
   usermod -aG mediacenter notifiarr
   
-  print_info "Users added to mediacenter group."
+  msg_info "Users added to mediacenter group."
 }
 
 # Set permissions
@@ -88,7 +90,7 @@ set_permissions() {
   chown seerr:seerr ${CONFIG_DIR}/seerr
   chown notifiarr:notifiarr ${CONFIG_DIR}/notifiarr
 
-  print_info "Permissions set."
+  msg_info "Permissions set."
 }
 
-print_success "Done! It is recommended to reboot now."
+msg_ok "Done! It is recommended to reboot now."
